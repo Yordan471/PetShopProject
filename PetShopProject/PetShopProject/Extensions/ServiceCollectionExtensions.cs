@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PetShopProject.Data;
+using PetShopProject.Infrastructure.Data;
 
 namespace PetShopProject.Extensions
 {
