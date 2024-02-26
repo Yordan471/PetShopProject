@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PetShopProject.Common\PetShopProject.Common.csproj" />
+  </ItemGroup>
+
 </Project>
