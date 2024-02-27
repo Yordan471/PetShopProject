@@ -18,7 +18,7 @@ namespace PetShopProject.Common
             public const int PasswordMinLength = 8;
         }
 
-        public static class Product
+        public static class ProductValidations
         {
             public const int NameMaxLength = 150;
             public const int NameMinLength = 3;
@@ -35,6 +35,47 @@ namespace PetShopProject.Common
             public const int NameMinLength = 3;
         }
 
+        public static class OrderValidations
+        {
+            public const decimal TotalAmountMaxValue = int.MaxValue;
+            public const decimal TotalAmountMinValue = 0.01M;
+        }
 
+        public static class OrderDetailsValidations
+        {
+            public const int QuantityMaxValue = 100;
+            public const int QuantityMinValue = 1;
+            public const decimal PriceMaxValue = int.MaxValue;
+            public const decimal PriceMinValue = 0.01M;
+        }
+
+        public static class CartDetailsValidations
+        {
+            public const int QuantityMaxValue = 100;
+            public const int QuantityMinValue = 1;
+            public const decimal PriceMaxValue = int.MaxValue;
+            public const decimal PriceMinValue = 0.01M;
+        }
+
+        public static class BlogPostValidations
+        {
+            public const int TitleMaxLength = 150;
+            public const int TitleMinLength = 3;
+            public const int ContentMaxValue = 5000;
+            public const int ContentMinValue = 100;
+            public const int ImageUrlMaxLength = 2048;
+        }
+
+        public static class TagValidations
+        {
+            public const int TagNameMaxLength = 50;
+            public const int TagNameMinLength = 3;  
+        }
+
+        public static class CommentValidations
+        {
+            public const int ContentMaxValue = 5000;
+            public const int ContentMinValue = 2;
+        }
     }
 }
