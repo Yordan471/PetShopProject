@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Extensions;
+using PetShopProject.ModelBindings;
 
 namespace PetShopProject
 {
@@ -16,7 +17,11 @@ namespace PetShopProject
             builder.Services.AddApplicationDbContext(builder.Configuration);
             builder.Services.AddApplicationIdentity(builder.Configuration);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                });
 
             builder.Services.AddApplicationServices();
 
