@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace PetShopProject.Infrastructure.Data.Models
 {
@@ -38,6 +34,7 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Price of a single unit for product")]
         [Required]
+        
         public decimal UnitPrice { get; set; }
     }
 }
