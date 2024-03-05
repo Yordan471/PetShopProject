@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Extensions;
 using PetShopProject.ModelBindings;
+using PetShopProject.ModelBindings.Providers;
 
 namespace PetShopProject
 {
@@ -21,6 +22,7 @@ namespace PetShopProject
                 .AddMvcOptions(options =>
                 {
                     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                    options.ModelBinderProviders.Insert(1, new DateTimeFormatModelBinderProvider());
                 });
 
             builder.Services.AddApplicationServices();
