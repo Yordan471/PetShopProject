@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace PetShopProject.ModelBindings
+namespace PetShopProject.ModelBindings.Providers
 {
     public class DecimalModelBinderProvider : IModelBinderProvider
     {
@@ -11,7 +11,7 @@ namespace PetShopProject.ModelBindings
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.Metadata.ModelType == typeof(decimal) 
+            if (context.Metadata.ModelType == typeof(decimal)
                 || context.Metadata.ModelType == typeof(decimal?))
             {
                 return new DecimalModelBinding();
