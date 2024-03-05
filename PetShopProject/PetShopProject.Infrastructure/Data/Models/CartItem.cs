@@ -15,7 +15,7 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Custummer identifier")]
         [Required]
-        public int CustrummerId { get; set; }
+        public string CustrummerId { get; set; } = string.Empty;
 
         [Comment("Custummer entity")]
         public IdentityUser Custummer { get; set; } = null!;

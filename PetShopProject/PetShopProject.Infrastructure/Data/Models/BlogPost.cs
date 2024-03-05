@@ -29,7 +29,7 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Author identifier")]
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         [ForeignKey(nameof(AuthorId))]
         public IdentityUser Author { get; set; } = null!;
