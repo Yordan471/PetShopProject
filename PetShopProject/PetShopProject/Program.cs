@@ -22,7 +22,6 @@ namespace PetShopProject
                 .AddMvcOptions(options =>
                 {
                     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-                    options.ModelBinderProviders.Insert(1, new DateTimeFormatModelBinderProvider());
                 });
 
             builder.Services.AddApplicationServices();

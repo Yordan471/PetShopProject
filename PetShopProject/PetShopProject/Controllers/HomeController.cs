@@ -18,6 +18,11 @@ namespace PetShopProject.Controllers
             return View();
         }
 
+        public IActionResult GetDate(DateTime date)
+        {
+            return Ok(new { date });
+        }
+
         public IActionResult Privacy()
         {
             return View();
