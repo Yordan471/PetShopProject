@@ -13,14 +13,6 @@ namespace PetShopProject.Infrastructure.Data.Models
         [Key]
         public int Id { get; set; }
 
-        [Comment("Post identifier")]
-        [Required]
-        public int PostId { get; set; }
-
-        [Comment("Blog post entity")]
-        [ForeignKey(nameof(PostId))]
-        public BlogPost BlogPost { get; set; } = null!;
-
         [Comment("User identifier")]
         [Required]
         public Guid UserId { get; set; }
@@ -37,5 +29,19 @@ namespace PetShopProject.Infrastructure.Data.Models
         [Comment("Comment creation date")]
         [Required]
         public DateTime CommentDate { get; set; }
+
+        [Comment("Product identifier")]
+        public int? ProductId { get; set; }
+
+        [Comment("Product entity")]
+        [ForeignKey(nameof(ProductId))]
+        public Product? Product { get; set; }
+
+        [Comment("BlogPost identifier")]
+        public int? BlogPostId { get; set; }
+
+        [Comment("BlogPost entity")]
+        [ForeignKey(nameof(BlogPostId))]
+        public BlogPost? BlogPost { get; set; }
     }
 }
