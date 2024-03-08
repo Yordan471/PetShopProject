@@ -14,16 +14,21 @@ namespace PetShopProject.Infrastructure.Data.Models
     [Comment("Order of product/s")]
     public class Order
     {
+        public Order() 
+        {
+            IsCompleted = false;
+        }
+
         [Comment("Order identifier")]
         [Key]
         public int Id { get; set; }
 
         [Comment("User identifier")]
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Comment("User entity")]
-        public IdentityUser User { get; set; }
+        public User User { get; set; } = null!;
 
         [Comment("Date time of order")]
         [Required]

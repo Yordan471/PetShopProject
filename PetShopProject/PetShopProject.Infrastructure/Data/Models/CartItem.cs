@@ -15,10 +15,10 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Custummer identifier")]
         [Required]
-        public string CustrummerId { get; set; } = string.Empty;
+        public Guid CustrummerId { get; set; }
 
         [Comment("Custummer entity")]
-        public IdentityUser Custummer { get; set; } = null!;
+        public User Custummer { get; set; } = null!;
 
         [Comment("Product identifier")]
         [Required]
@@ -31,10 +31,5 @@ namespace PetShopProject.Infrastructure.Data.Models
         [Comment("Quantity of a product")]
         [Required]
         public int Quantity { get; set; }
-
-        [Comment("Price of a single unit for product")]
-        [Required]
-        
-        public decimal UnitPrice { get; set; }
     }
 }

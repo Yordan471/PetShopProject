@@ -37,6 +37,6 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Price for a unit ot product")]
         [Required]
-        public decimal UnitPrice { get; set; }
+        public decimal Price { get; set; }
     }
 }

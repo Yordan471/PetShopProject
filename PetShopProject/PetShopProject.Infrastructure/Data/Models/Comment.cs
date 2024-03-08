@@ -23,15 +23,19 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("User identifier")]
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Comment("User entity")]
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public User User { get; set; } = null!;
 
         [Comment("Comment content")]
         [Required]
         [MaxLength(ContentMaxValue)]
         public string Content { get; set; } = null!;
+
+        [Comment("Comment creation date")]
+        [Required]
+        public DateTime CommentDate { get; set; }
     }
 }

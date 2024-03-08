@@ -9,7 +9,7 @@ namespace PetShopProject.Infrastructure.Data.Models
     {
         public Tag() 
         {
-            PostsTags = new HashSet<PostTag>();
+            BlogPostsTags = new HashSet<PostTag>();
         }
 
         [Comment("Tag identifier")]
@@ -21,7 +21,7 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(TagNameMaxLength)]
         public string TagName { get; set; } = null!;
 
-        [Comment("Collection of posts and tags")]
-        public ICollection<PostTag> PostsTags { get; set; }
+        [Comment("Tag navigation property to collection of blog post tags")]
+        public ICollection<PostTag> BlogPostsTags { get; set; }
     }
 }

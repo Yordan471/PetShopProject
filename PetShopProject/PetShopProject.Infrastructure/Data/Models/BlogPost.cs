@@ -9,6 +9,12 @@ namespace PetShopProject.Infrastructure.Data.Models
     [Comment("Blog post of a user")]
     public class BlogPost
     {
+        public BlogPost() 
+        {
+            Tags = new HashSet<Tag>();
+            Comments = new HashSet<Comment>();
+        }
+        
         [Comment("Blog post identifuer")]
         [Key]
         public int Id { get; set; }
@@ -29,9 +35,16 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Author identifier")]
         [Required]
-        public string AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
 
+        [Comment("Author entity")]
         [ForeignKey(nameof(AuthorId))]
-        public IdentityUser Author { get; set; } = null!;
+        public User Author { get; set; } = null!;
+
+        [Comment("BlogPost navigation property to tags")]
+        public ICollection<Tag> Tags { get; set; }
+
+        [Comment("BlogPost navigation property to comments")]
+        public ICollection<Comment> Comments { get; set; }
     }
 }
