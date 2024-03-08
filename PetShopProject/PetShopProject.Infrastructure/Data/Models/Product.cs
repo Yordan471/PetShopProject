@@ -8,6 +8,12 @@ namespace PetShopProject.Infrastructure.Data.Models
     [Comment("Animal product")]
     public class Product
     {
+        public Product() 
+        {
+            Comments = new HashSet<Comment>();
+            OrdersDetails = new HashSet<OrderDetails>();
+        }
+
         [Comment("Product identifier")]
         [Key]
         public int Id { get; set; }
@@ -39,5 +45,11 @@ namespace PetShopProject.Infrastructure.Data.Models
         [Comment("Category entity")]
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
+
+        [Comment("Product navigation property to collection of comments")]
+        public ICollection<Comment> Comments { get; set; }
+
+        [Comment("Product navigation property to collection of orders details")]
+        public ICollection<OrderDetails> OrdersDetails { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PetShopProject.Infrastructure.Data.Models
 {
     [Comment("Details of the order")]
-    public class OrderItem
+    public class OrderDetails
     {
         [Comment("Order details identifier")]
         [Key]
