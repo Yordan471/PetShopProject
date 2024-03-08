@@ -30,6 +30,10 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                 .WithOne(c => c.Product)
                 .HasForeignKey(c => c.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .Property(p => p.Price)
+                .HasPrecision(18, 2);
         }
     }
 }

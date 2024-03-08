@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace PetShopProject.Infrastructure.Data.Configurations
 {
-    public class CartItemConfigurations : IEntityTypeConfiguration<CartItem>
+    public class OrderDetailsEntityConfigurations : IEntityTypeConfiguration<OrderDetails>
     {
-        public void Configure(EntityTypeBuilder<CartItem> builder)
+        public void Configure(EntityTypeBuilder<OrderDetails> builder)
         {
-            
+            builder
+                .Property(od => od.Price)
+                .HasPrecision(18, 2);
         }
     }
 }
