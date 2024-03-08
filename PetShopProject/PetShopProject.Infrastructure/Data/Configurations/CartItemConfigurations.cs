@@ -13,9 +13,7 @@ namespace PetShopProject.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<CartItem> builder)
         {
-            builder
-                .Property(ci => ci.UnitPrice)
-                .HasPrecision(18, 2);
+            
         }
     }
 }
