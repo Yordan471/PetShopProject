@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetShopProject.Infrastructure.Data.Configurations
 {
-    public class OredrEntityConfigurations : IEntityTypeConfiguration<Order>
+    public class OrderEntityConfigurations : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
