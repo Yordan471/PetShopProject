@@ -17,6 +17,7 @@ namespace PetShopProject.Infrastructure.Data.Models
         public Order() 
         {
             IsCompleted = false;
+            OrdersDetails = new HashSet<OrderDetails>();
         }
 
         [Comment("Order identifier")]
@@ -40,6 +41,9 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Order is completed or not")]
         [Required]
-        public bool IsCompleted { get; set; } 
+        public bool IsCompleted { get; set; }
+
+        [Comment("Order navigation property to collection of Orders details")]
+        public ICollection<OrderDetails> OrdersDetails { get; set; }
     }
 }

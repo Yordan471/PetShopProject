@@ -9,7 +9,7 @@ namespace PetShopProject.Infrastructure.Data.Models
     {
         public Tag() 
         {
-            BlogPostsTags = new HashSet<PostTag>();
+            BlogPostsTags = new HashSet<BlogPostTag>();
         }
 
         [Comment("Tag identifier")]
@@ -22,6 +22,6 @@ namespace PetShopProject.Infrastructure.Data.Models
         public string TagName { get; set; } = null!;
 
         [Comment("Tag navigation property to collection of blog post tags")]
-        public ICollection<PostTag> BlogPostsTags { get; set; }
+        public ICollection<BlogPostTag> BlogPostsTags { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace PetShopProject.Infrastructure.Data.Models
         [Required]
         public int Quantity { get; set; }
 
-        [Comment("Price for a unit ot product")]
+        [Comment("Price for a unit of product")]
         [Required]
         public decimal Price { get; set; }
     }

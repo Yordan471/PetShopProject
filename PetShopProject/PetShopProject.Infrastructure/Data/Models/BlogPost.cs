@@ -11,7 +11,7 @@ namespace PetShopProject.Infrastructure.Data.Models
     {
         public BlogPost() 
         {
-            Tags = new HashSet<Tag>();
+            BlogPostsTags = new HashSet<BlogPostTag>();
             Comments = new HashSet<Comment>();
         }
         
@@ -41,10 +41,10 @@ namespace PetShopProject.Infrastructure.Data.Models
         [ForeignKey(nameof(AuthorId))]
         public User Author { get; set; } = null!;
 
-        [Comment("BlogPost navigation property to tags")]
-        public ICollection<Tag> Tags { get; set; }
-
         [Comment("BlogPost navigation property to comments")]
         public ICollection<Comment> Comments { get; set; }
+
+        [Comment("BlogPost navigation property to blog posts tags")]
+        public ICollection<BlogPostTag> BlogPostsTags { get; set; }
     }
 }
