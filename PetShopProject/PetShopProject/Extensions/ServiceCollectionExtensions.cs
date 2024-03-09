@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Infrastructure.Data.Models;
+using static PetShopProject.Common.GlobalConstants;
 
 namespace PetShopProject.Extensions
 {
@@ -28,6 +29,12 @@ namespace PetShopProject.Extensions
             services.AddDefaultIdentity<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = PasswordMinLength;
+                options.Password.RequiredUniqueChars = RequiredUniqueChars;
             })
                 .AddEntityFrameworkStores<PetShopDbContext>();
             
