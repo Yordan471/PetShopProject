@@ -13,6 +13,26 @@ namespace PetShopProject.Infrastructure.Data
         {
         }
 
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
+        public DbSet<BlogPostTag> BlogPostsTags { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetails> OrdersDetails { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserEntityConfigurations());
