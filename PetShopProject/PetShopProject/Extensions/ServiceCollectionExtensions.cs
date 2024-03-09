@@ -28,13 +28,20 @@ namespace PetShopProject.Extensions
         {
             services.AddDefaultIdentity<User>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = PasswordMinLength;
-                options.Password.RequiredUniqueChars = RequiredUniqueChars;
+                options.SignIn.RequireConfirmedAccount = config
+                .GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+                options.Password.RequireNonAlphanumeric = config
+                .GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+                options.Password.RequireUppercase = config
+                .GetValue<bool>("Identity:Password:RequireUppercase");
+                options.Password.RequireLowercase = config
+                .GetValue<bool>("Identity:Password:RequireLowercase");
+                options.Password.RequireDigit = config
+                .GetValue<bool>("Identity:Password:RequireDigit");
+                options.Password.RequiredLength = config
+                .GetValue<int>("Identity:Password:RequiredLength");
+                options.Password.RequiredUniqueChars = config
+                .GetValue<int>("Identity:Password:RequiredUniqueChars");
             })
                 .AddEntityFrameworkStores<PetShopDbContext>();
             
