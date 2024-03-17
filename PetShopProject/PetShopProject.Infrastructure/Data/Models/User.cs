@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PetShopProject.Infrastructure.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using static PetShopProject.Common.EntityValidationsConstants.UserValidations;
 
@@ -29,6 +30,13 @@ namespace PetShopProject.Infrastructure.Data.Models
         [Required]
         [MaxLength(AddressMaxLength)]
         public string Address { get; set; } = string.Empty;
+
+        [Comment("Recipient name")]
+        [Required]
+        [MaxLength(RecipientNameMaxLength)]
+        public string RecipientName { get; set; } = string.Empty;
+
+        public ContactPreference ContactPreferance { get; set; }
 
         [Comment("User's collection of orders")]
         public ICollection<Order> Orders { get; set; }
