@@ -4,6 +4,7 @@ using PetShopProject.Infrastructure.Data;
 using PetShopProject.Extensions;
 using PetShopProject.ModelBindings;
 using PetShopProject.ModelBindings.Providers;
+using PetShopProject.Infrastructure.Data.Models;
 
 namespace PetShopProject
 {
@@ -25,6 +26,7 @@ namespace PetShopProject
                 });
 
             builder.Services.AddApplicationServices();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 

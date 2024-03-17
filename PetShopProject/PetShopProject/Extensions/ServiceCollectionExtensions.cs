@@ -26,7 +26,7 @@ namespace PetShopProject.Extensions
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<User>(options =>
+            services.AddIdentity<User, IdentityRole<Guid>>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = config
                 .GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
@@ -45,7 +45,6 @@ namespace PetShopProject.Extensions
             })
                 .AddEntityFrameworkStores<PetShopDbContext>();
             
-
             return services;
         }
     }
