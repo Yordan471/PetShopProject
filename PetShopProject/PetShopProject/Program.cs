@@ -1,10 +1,5 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using PetShopProject.Infrastructure.Data;
 using PetShopProject.Extensions;
-using PetShopProject.ModelBindings;
 using PetShopProject.ModelBindings.Providers;
-using PetShopProject.Infrastructure.Data.Models;
 
 namespace PetShopProject
 {
@@ -26,6 +21,13 @@ namespace PetShopProject
                 });
 
             builder.Services.AddApplicationServices();
+            builder.Services.AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = builder.Configuration["Authentication:Facebook:AppId"];
+                    options.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
+                });
+
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
