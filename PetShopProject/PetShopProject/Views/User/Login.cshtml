@@ -26,7 +26,7 @@
         @{
             if (Model.ExternalLogins != null && Model.ExternalLogins.Count > 0)
             {
-                <form id="external-account" asp-page="./ExternalLogin" method="post" class="form-horizontal">
+                <form id="external-account" asp-controller="User" asp-action="ExternalLogin" method="post" class="form-horizontal">
                     <div>
                         <p>
                             @foreach (var provider in Model.ExternalLogins)
