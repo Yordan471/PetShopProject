@@ -157,5 +157,16 @@ namespace PetShopProject.Controllers
                 return RedirectToAction(nameof(Register));
             }
         }
+
+        [AllowAnonymous]
+        public IActionResult DeletionInstructions()
+        {
+            //if (User?.Identity?.IsAuthenticated ?? false)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            return View();
+        }
     }
 }
