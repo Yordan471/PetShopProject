@@ -14,10 +14,19 @@ namespace PetShopProject.Common
             public const int FirstNameMinLength = 2;
             public const int LastNameMaxLength = 50;
             public const int LastNameMinLength = 2;
-            public const int AddressMaxLength = 150;
-            public const int AddressMinLength = 3;
             public const int RecipientNameMaxLength = 50;
             public const int RecipientNameMinLength = 2;    
+        }
+
+        public static class AddressValidations
+        {
+            public const int PostalCodeMaxLength = 12;
+            public const int PostalCodeMinLength = 4;
+            public const string PostalCodeRegularExpression = "^\\d{4}$";
+            public const int CityMaxLength = 25;
+            public const int CityMinLength = 2;
+            public const int StreetMaxLength = 50;
+            public const int StreetMinLength = 2;
         }
 
         public static class ProductValidations
