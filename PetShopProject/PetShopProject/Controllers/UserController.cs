@@ -45,7 +45,17 @@ namespace PetShopProject.Controllers
             var user = new User
             { 
                 UserName = model.LastName,
-                Email = model.Email 
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                RecipientName = model.RecipientName,
+                Address = new()
+                {
+                    Street = model.Address.Street,
+                    City = model.Address.City,
+                    PostalCode = model.Address.PostalCode,
+                }
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -106,6 +116,8 @@ namespace PetShopProject.Controllers
             return View(model);
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -161,11 +173,6 @@ namespace PetShopProject.Controllers
         [AllowAnonymous]
         public IActionResult DeletionInstructions()
         {
-            //if (User?.Identity?.IsAuthenticated ?? false)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
             return View();
         }
     }
