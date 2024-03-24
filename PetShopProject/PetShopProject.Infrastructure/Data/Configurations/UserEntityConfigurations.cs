@@ -36,6 +36,11 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                 .WithOne(ci => ci.Custummer)
                 .HasForeignKey(ci => ci.CustummerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(u => u.Address)
+                .WithOne(a => a.User)
+                .HasForeignKey<User>(u => u.AddressId);
         }
     }
 }
