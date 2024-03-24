@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PetShopProject.Infrastructure.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static PetShopProject.Common.EntityValidationsConstants.UserValidations;
 
 namespace PetShopProject.Infrastructure.Data.Models
@@ -26,10 +27,13 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; } = string.Empty;
 
-        [Comment("User's address")]
+        [Comment("Address identifier")]
         [Required]
-        [MaxLength(AddressMaxLength)]
-        public string Address { get; set; } = string.Empty;
+        public int AddressId { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(AddressId))]
+        public Address Address { get; set; }
 
         [Comment("Recipient name")]
         [Required]
