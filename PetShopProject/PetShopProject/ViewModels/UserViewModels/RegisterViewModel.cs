@@ -94,43 +94,10 @@ namespace PetShopProject.ViewModels.UserViewModels
         public string RecipientName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Postal code of the city
+        /// Address for the purchase to be delivered
         /// </summary>
-        [Required(ErrorMessage = PostalCodeRequiredErrMessage)]
-        [Display(Name = "Пощенски код")]
-        [StringLength(PostalCodeMaxLength, MinimumLength = PostalCodeMinLength, 
-            ErrorMessage = PostalCodeInccorectLength)]
-        [RegularExpression(PostalCodeRegularExpression, ErrorMessage = PostalCodeOnlyDigitsErrMessage)]
-        public string PostalCode { get; set; } = string.Empty;
-
-        /// <summary>
-        /// City chosen by the user for registration
-        /// </summary>
-        [Required(ErrorMessage = CityRequiredErrMessage)]
-        [Display(Name = "Град")]
-        [StringLength(CityMaxLength, MinimumLength = CityMinLength,
-            ErrorMessage = CityInccorectLength)]
-        public string City { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Street of the city
-        /// </summary>
-        [Required(ErrorMessage = StreetRequiredErrMessage)]
-        [Display(Name = "Улица")]
-        [StringLength(StreetMaxLength, MinimumLength = StreetMinLength,
-            ErrorMessage = StreetInccorectLength)]
-        public string Street { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Street number
-        /// </summary>
-        [Required(ErrorMessage = StreetNumberRequiredErrMessage)]
-        [Display(Name = "Номер")]
-        [StringLength(StreetNumberMaxLength, MinimumLength = StreetNumberMinLength,
-            ErrorMessage = StreetNumberInccorectLength)]
-        public string StreetNumber { get; set; } = string.Empty;
-
-
+        [Required]
+        public AddressViewModel Address { get; set; }
     }
 }
 
