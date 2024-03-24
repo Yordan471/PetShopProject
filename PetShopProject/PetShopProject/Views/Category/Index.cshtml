@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@category.Id">Details</a>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <span> | </span>
+                            <a asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                            <span> | </span>
+                            <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No categories found.</p>
+}

@@ -1,0 +1,46 @@
+﻿@model ProductViewModel
+
+<h2>@Model.Name</h2>
+
+<div>
+    <p>Цена: @Model.Price.ToString()</p>
+    <p>@Model.Description</p>
+</div>
+
+<div>
+    <label for="quantity">Количество:</label>
+    <div>
+        <button id="decreaseQuantity" class="btn btn-secondary">-</button>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control" />
+        <button id="increaseQuantity" class="btn btn-secondary">+</button>
+    </div>
+</div>
+
+<button id="addToCart" class="btn btn-primary">Добави в количка</button>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var quantityInput = $('#quantity');
+
+            $('#decreaseQuantity').click(function () {
+                var currentQuantity = parseInt(quantityInput.val());
+                if (currentQuantity > 1) {
+                    quantityInput.val(currentQuantity - 1);
+                }
+            });
+
+            $('#increaseQuantity').click(function () {
+                var currentQuantity = parseInt(quantityInput.val());
+                quantityInput.val(currentQuantity + 1);
+            });
+
+            $('#addToCart').click(function () {
+                var productId = @Model.Id;
+                var quantity = parseInt(quantityInput.val());
+                // Добавяне на продукта в количката
+                console.log('Продуктът с ID ' + productId + ' е добавен в количката. Количество: ' + quantity);
+            });
+        });
+    </script>
+}
