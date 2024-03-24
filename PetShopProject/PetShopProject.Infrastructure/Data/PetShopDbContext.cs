@@ -33,6 +33,8 @@ namespace PetShopProject.Infrastructure.Data
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserEntityConfigurations());
