@@ -26,6 +26,11 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = string.Empty;
 
+        [Comment("Animal type")]
+        [MaxLength()]
+        [Required]
+        public string AnimalType { get; set; } = string.Empty;
+
         [Comment("Category navigation property collection to products")]
         public ICollection<Product> Products { get; set; }
     }

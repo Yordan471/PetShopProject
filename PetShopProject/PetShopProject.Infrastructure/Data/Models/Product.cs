@@ -23,10 +23,15 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(NameMaxLength)]
         public string Name { get; set; } = string.Empty;
 
-        [Comment("Product description")]
+        [Comment("Product short description")]
         [Required]
-        [MaxLength(DescriptionMaxLength)]
-        public string Description { get; set; } = string.Empty;
+        [MaxLength(ShortDescriptionMaxLength)]
+        public string ShortDescription { get; set; } = string.Empty;
+
+        [Comment("Product long description")]
+        [Required]
+        [MaxLength(LongDescriptionMaxLength)]
+        public string LongDescription { get; set; } = string.Empty;
 
         [Comment("Product price")]
         [Required]
@@ -34,9 +39,13 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("Product image path")]
         [Required]
-        [Url]
         [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = string.Empty;
+
+        [Comment("Animal type")]
+        [MaxLength(AnimalTypeMaxLength)]
+        [Required]
+        public string AnimalType { get; set; } = string.Empty;
 
         [Comment("Category identifier")]
         [Required]
