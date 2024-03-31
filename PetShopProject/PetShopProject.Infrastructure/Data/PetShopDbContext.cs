@@ -42,6 +42,7 @@ namespace PetShopProject.Infrastructure.Data
             builder.ApplyConfiguration(new OrderEntityConfigurations());
             builder.ApplyConfiguration(new ProductEntityConfigurations());
             builder.ApplyConfiguration(new TagEntityConfigurations());
+            builder.ApplyConfiguration(new CategoryConfigurations());
 
             base.OnModelCreating(builder); 
         }
