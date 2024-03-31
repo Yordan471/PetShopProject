@@ -12,6 +12,6 @@ namespace PetShopProject.Core.Contracts
     {
         public Task<Product> GetProductByIdAsync(int id);
 
-        public Task<IEnumerable<ProductViewModel>> GetAllProductsOfCategoryAsync(int id);
+        //public Task<IEnumerable<ProductViewModel>> GetAllProductsOfCategoryAsync(int id);
     }
 }

@@ -20,21 +20,21 @@ namespace PetShopProject.Core.Services
             this.dbContext = _dbContext;
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetAllProductsOfCategoryAsync(int id)
-        {
-            Category category = await dbContext.Categories.FindAsync(id);
+        //public async Task<IEnumerable<ProductViewModel>> GetAllProductsOfCategoryAsync(int Id)
+        //{
+        //    Category category = await dbContext.Categories.FindAsync(Id);
 
-            List<ProductViewModel> products = category.Products.Select(p => new ProductViewModel()
-            {
-                Name = p.Name,
-                Description = p.Description,
-                ImageUrl = p.ImageUrl,
-                Price = p.Price.ToString()
-            })
-                .ToList();
+        //    List<ProductViewModel> products = category.Products.Select(p => new ProductViewModel()
+        //    {
+        //        Name = p.Name,
+        //        Description = p.ShortDescription,
+        //        ImageUrl = p.ImageUrl,
+        //        Price = p.Price.ToString()
+        //    })
+        //        .ToList();
             
-            return products;
-        }
+        //    return products;
+        //}
 
         public Task<Product> GetProductByIdAsync(int id)
         {

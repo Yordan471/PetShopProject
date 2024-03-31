@@ -3,6 +3,7 @@ using PetShopProject.Core.Contracts;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.ViewModels.CategoryViewModels;
+using PetShopProject.ViewModels.ProductViewModels;
 
 
 namespace PetShopProject.Core.Services
@@ -22,6 +23,7 @@ namespace PetShopProject.Core.Services
                 .AsNoTracking()
                 .Select(c => new CategoryViewModel
                 {
+                    Id = c.Id,
                     Name = c.Name,
                     Description = c.Description,
                 })
@@ -30,14 +32,30 @@ namespace PetShopProject.Core.Services
             return categories;
         }
 
-        public async Task<CategoryViewModel> GetCategoryByIdAsync(int id)
+        public async Task<CategoryViewModel> GetCategoryByIdAsync(int Id)
         {
-            Category category = await dbContext.Categories.FindAsync(id);
+            Category category = await dbContext.Categories
+                .AsNoTracking()
+                .Include(c => c.Products)
+                .FirstAsync(c => c.Id == Id);
+
+            string type = "Куче";
 
             CategoryViewModel categoryView = new()
             {
                 Name = category.Name,
                 Description = category.Description,
+                Products = category.Products
+                .Where(p => p.AnimalType == type)
+                .Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price.ToString(),
+                    ImageUrl = p.ImageUrl,
+                    Description = p.ShortDescription
+                })
+                .ToList()
             };
 
             return categoryView;
