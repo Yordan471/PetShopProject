@@ -30,20 +30,13 @@ namespace PetShopProject.Controllers
             return View(categories);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int Id)
         {
-            CategoryViewModel category = await categoryService.GetCategoryByIdAsync(id);
+            CategoryViewModel category = await categoryService.GetCategoryByIdAsync(Id);
 
             if (category == null)
             {
                 return NotFound();
-            }
-
-            IEnumerable<ProductViewModel> products = await productService.GetAllProductsOfCategoryAsync(id);
-
-            if (products != null && products.Any())
-            {
-                category.Products = products;
             }
 
             return View(category);
