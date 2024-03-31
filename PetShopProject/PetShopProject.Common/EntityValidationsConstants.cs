@@ -33,11 +33,15 @@ namespace PetShopProject.Common
         {
             public const int NameMaxLength = 150;
             public const int NameMinLength = 3;
-            public const int DescriptionMaxLength = 1000;
-            public const int DescriptionMinLength = 5;
+            public const int LongDescriptionMaxLength = 1000;
+            public const int LongDescriptionMinLength = 5;
+            public const int ShortDescriptionMaxLength = 100;
+            public const int ShortDescriptionMinLength = 5;
             public const string PriceMaxValue = "10000";
             public const string PriceMinValue = "0";
             public const int ImageUrlMaxLength = 2048;
+            public const int AnimalTypeMaxLength = 25;
+            public const int AnimalTypeMinLength = 2;
         }
 
         public static class CategoryValidations
@@ -46,6 +50,8 @@ namespace PetShopProject.Common
             public const int NameMinLength = 3;
             public const int DescriptionMaxLength = 150;
             public const int DescriptionMinLength = 2;
+            public const int AnimalTypeMaxLength = 25;
+            public const int AnimalTypeMinLength = 2;
         }
 
         public static class OrderValidations
