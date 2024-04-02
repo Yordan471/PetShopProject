@@ -5,10 +5,12 @@ namespace PetShopProject.Core.Contracts
 {
     public interface ICategoryService
     {
-        public Task<CategoryViewModel> GetCategoryByIdAsync(int id); 
+        public Task<Category> GetCategoryByIdAsync(int id); 
 
         public Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync();
 
         public Task<Category> CreateCategoryAsync(Category category);
+
+        public Task DeleteCategoryAsync(int id);
     }
 }

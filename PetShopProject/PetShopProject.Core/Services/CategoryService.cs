@@ -24,6 +24,17 @@ namespace PetShopProject.Core.Services
             return category;
         }
 
+        public async Task DeleteCategoryAsync(int id)
+        {
+            var category = await dbContext.Categories.FindAsync(id);
+
+            if (category != null)
+            {
+                dbContext.Categories.Remove(category);
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync()
         {
             IEnumerable<CategoryViewModel> categories = await dbContext.Categories
@@ -39,33 +50,14 @@ namespace PetShopProject.Core.Services
             return categories;
         }
 
-        public async Task<CategoryViewModel> GetCategoryByIdAsync(int Id)
+        public async Task<Category> GetCategoryByIdAsync(int Id)
         {
             Category category = await dbContext.Categories
                 .AsNoTracking()
                 .Include(c => c.Products)
                 .FirstAsync(c => c.Id == Id);
 
-            string type = "Куче";
-
-            CategoryViewModel categoryView = new()
-            {
-                Name = category.Name,
-                Description = category.Description,
-                Products = category.Products
-                .Where(p => p.AnimalType == type)
-                .Select(p => new ProductViewModel
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Price = p.Price.ToString(),
-                    ImageUrl = p.ImageUrl,
-                    Description = p.ShortDescription
-                })
-                .ToList()
-            };
-
-            return categoryView;
+            return category;
         }
     }
 }
