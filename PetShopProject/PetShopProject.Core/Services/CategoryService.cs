@@ -17,6 +17,13 @@ namespace PetShopProject.Core.Services
             this.dbContext = _dbContext;
         }
 
+        public async Task<Category> CreateCategoryAsync(Category category)
+        {
+            dbContext.Categories.Add(category);
+            await dbContext.SaveChangesAsync();
+            return category;
+        }
+
         public async Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync()
         {
             IEnumerable<CategoryViewModel> categories = await dbContext.Categories

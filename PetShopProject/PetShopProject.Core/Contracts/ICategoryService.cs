@@ -8,5 +8,7 @@ namespace PetShopProject.Core.Contracts
         public Task<CategoryViewModel> GetCategoryByIdAsync(int id); 
 
         public Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync();
+
+        public Task<Category> CreateCategoryAsync(Category category);
     }
 }
