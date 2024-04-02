@@ -48,7 +48,7 @@ namespace PetShopProject.Common
         {
             public const int NameMaxLength = 50;
             public const int NameMinLength = 3;
-            public const int DescriptionMaxLength = 150;
+            public const int DescriptionMaxLength = 300;
             public const int DescriptionMinLength = 2;
             public const int AnimalTypeMaxLength = 25;
             public const int AnimalTypeMinLength = 2;
