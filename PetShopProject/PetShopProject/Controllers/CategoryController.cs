@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetShopProject.Core.Contracts;
+using PetShopProject.Core.Services;
 using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.ViewModels.CategoryViewModels;
+using PetShopProject.ViewModels.ProductViewModels;
 
 
 namespace PetShopProject.Controllers
@@ -31,7 +33,26 @@ namespace PetShopProject.Controllers
 
         public async Task<IActionResult> Details(int Id)
         {
-            CategoryViewModel category = await categoryService.GetCategoryByIdAsync(Id);
+            Category category = await categoryService.GetCategoryByIdAsync(Id);
+
+            string type = "Куче";
+
+            CategoryViewModel categoryView = new()
+            {
+                Name = category.Name,
+                Description = category.Description,
+                Products = category.Products
+                .Where(p => p.AnimalType == type)
+                .Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price.ToString(),
+                    ImageUrl = p.ImageUrl,
+                    Description = p.ShortDescription
+                })
+                .ToList()
+            };
 
             if (category == null)
             {
@@ -67,6 +88,33 @@ namespace PetShopProject.Controllers
             await categoryService.CreateCategoryAsync(category);
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            Category category = await categoryService.GetCategoryByIdAsync(Id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            CategoryDeleteViewModel categoryDelete = new CategoryDeleteViewModel()
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                AnimalType = category.AnimalType
+            };
+
+            return View(categoryDelete);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int Id)
+        {
+            await categoryService.DeleteCategoryAsync(Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
