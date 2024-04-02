@@ -50,5 +50,11 @@ namespace PetShopProject.Common
         // Street number
         public const string StreetNumberRequiredErrMessage = "Номерът на улицата е задължителен.";
         public const string StreetNumberInccorectLength = "Номерът на улицата трябва да бъде {2} и най-много {1} знака.";
+
+        // Name Category Create
+        public const string NameCategoryInccorectLength = "Името на категорията трябва да бъде {2} и най-много {1} знака";
+
+        // Description Category Create
+        public const string DescriptionCategoryInccorectlength = "Описанието на категорията трябва да бъде {2} и най-много {1} знака";
     }
 }
