@@ -2,7 +2,6 @@
 using PetShopProject.Core.Contracts;
 using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.ViewModels.CategoryViewModels;
-using PetShopProject.ViewModels.ProductViewModels;
 
 
 namespace PetShopProject.Controllers
@@ -40,6 +39,34 @@ namespace PetShopProject.Controllers
             }
 
             return View(category);
+        }
+
+        public IActionResult Create()
+        {
+            CreateCategoryViewModel category = new();
+
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateCategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {      
+                return RedirectToAction(nameof(Create));
+            }
+
+            Category category = new()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                AnimalType = model.AnimalType
+            };
+
+            await categoryService.CreateCategoryAsync(category);
+
+            return View(model);
         }
     }
 }
