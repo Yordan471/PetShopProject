@@ -1,5 +1,5 @@
 ﻿using PetShopProject.Infrastructure.Data.Models;
-using PetShopProject.ViewModels.CategoryViewModels;
+using PetShopProject.Core.ViewModels.CategoryViewModels;
 
 namespace PetShopProject.Core.Contracts
 {

@@ -2,7 +2,7 @@
 using static PetShopProject.Common.EntityValidationsConstants.AddressValidations;
 using static PetShopProject.Common.EntityValidationsErrorMessages;
 
-namespace PetShopProject.ViewModels.UserViewModels
+namespace PetShopProject.Core.ViewModels.UserViewModels
 {
     public class AddressViewModel
     {

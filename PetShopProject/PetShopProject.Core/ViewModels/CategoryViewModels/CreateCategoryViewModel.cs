@@ -2,9 +2,9 @@
 using static PetShopProject.Common.EntityValidationsConstants.CategoryValidations;
 using static PetShopProject.Common.EntityValidationsErrorMessages;
 
-namespace PetShopProject.ViewModels.CategoryViewModels
+namespace PetShopProject.Core.ViewModels.CategoryViewModels
 {
-    public class CreateCategoryViewModel
+    public class CreateCategoryViewModel    
     {
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength,

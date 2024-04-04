@@ -47,7 +47,7 @@ namespace PetShopProject.Common
         public const string StreetRequiredErrMessage = "Улицата е задължителна.";
         public const string StreetInccorectLength = "Улицата трябва да бъде {2} и най-много {1} знака.";
 
-        // Street number
+        // Street number registration
         public const string StreetNumberRequiredErrMessage = "Номерът на улицата е задължителен.";
         public const string StreetNumberInccorectLength = "Номерът на улицата трябва да бъде {2} и най-много {1} знака.";
 
@@ -56,5 +56,8 @@ namespace PetShopProject.Common
 
         // Description Category Create
         public const string DescriptionCategoryInccorectlength = "Описанието на категорията трябва да бъде {2} и най-много {1} знака";
+
+        // AnimalType Category
+        public const string AnimalTypeCategoryInccorectLength = "Името на вида животно трябва да бъде {2} и най-много {1} знака";
     }
 }

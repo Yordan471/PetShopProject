@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetShopProject.ViewModels.ProductViewModels;
+using PetShopProject.Core.ViewModels.ProductViewModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace PetShopProject.ViewModels.CategoryViewModels
+namespace PetShopProject.Core.ViewModels.CategoryViewModels
 {
     public class CategoryViewModel
     {

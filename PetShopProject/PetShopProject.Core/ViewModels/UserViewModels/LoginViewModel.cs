@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using System.ComponentModel.DataAnnotations;
 
-namespace PetShopProject.ViewModels.UserViewModels
+namespace PetShopProject.Core.ViewModels.UserViewModels
 {
     public class LoginViewModel
     {

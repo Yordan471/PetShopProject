@@ -5,7 +5,7 @@ using static PetShopProject.Common.EntityValidationsErrorMessages;
 using static PetShopProject.Common.GlobalConstants;
 using static PetShopProject.Common.GlobalConstantsErrorMessages;
 
-namespace PetShopProject.ViewModels.UserViewModels
+namespace PetShopProject.Core.ViewModels.UserViewModels
 {
     /// <summary>
     /// View model for registration

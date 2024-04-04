@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-
-namespace PetShopProject.ViewModels.ProductViewModels
+﻿namespace PetShopProject.Core.ViewModels.ProductViewModels
 {
     public class ProductViewModel
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetShopProject.Infrastructure.Data.Models;
-using PetShopProject.ViewModels.UserViewModels;
+using PetShopProject.Core.ViewModels.UserViewModels;
 
 namespace PetShopProject.Controllers
 {

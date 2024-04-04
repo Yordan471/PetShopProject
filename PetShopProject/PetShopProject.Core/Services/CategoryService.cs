@@ -2,8 +2,8 @@
 using PetShopProject.Core.Contracts;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Infrastructure.Data.Models;
-using PetShopProject.ViewModels.CategoryViewModels;
-using PetShopProject.ViewModels.ProductViewModels;
+using PetShopProject.Core.ViewModels.CategoryViewModels;
+using PetShopProject.Core.ViewModels.ProductViewModels;
 
 
 namespace PetShopProject.Core.Services
