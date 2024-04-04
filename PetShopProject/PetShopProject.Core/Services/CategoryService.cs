@@ -35,6 +35,12 @@ namespace PetShopProject.Core.Services
             }
         }
 
+        public async Task EditCategoryAsync(CategoryEditViewModel editCategory)
+        {
+            dbContext.Entry(editCategory).State = EntityState.Modified;
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync()
         {
             IEnumerable<CategoryViewModel> categories = await dbContext.Categories

@@ -12,5 +12,7 @@ namespace PetShopProject.Core.Contracts
         public Task<Category> CreateCategoryAsync(Category category);
 
         public Task DeleteCategoryAsync(int id);
+
+        public Task EditCategoryAsync(CategoryEditViewModel editCategory);
     }
 }
