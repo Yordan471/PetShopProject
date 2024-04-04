@@ -116,5 +116,42 @@ namespace PetShopProject.Controllers
             await categoryService.DeleteCategoryAsync(Id);
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var category = await categoryService.GetCategoryByIdAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            CategoryEditViewModel editCategory = new()
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                AnimalType = category.AnimalType
+            };
+
+            return View(editCategory);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, CategoryEditViewModel category)
+        {
+            if (id != category.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await categoryService.EditCategoryAsync(category);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(category);
+        }
     }
 }
