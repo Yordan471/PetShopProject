@@ -1,11 +1,13 @@
+using Microsoft.AspNetCore.Identity;
 using PetShopProject.Extensions;
+using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.ModelBindings.Providers;
 
 namespace PetShopProject
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,8 @@ namespace PetShopProject
                     options.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
                 });
 
+
+
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
@@ -35,6 +39,7 @@ namespace PetShopProject
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
             else
@@ -55,7 +60,9 @@ namespace PetShopProject
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
 
-            app.Run();
+            await app.CreateAdminRoleAsync();
+
+            await app.RunAsync();
         }
     }
 }
