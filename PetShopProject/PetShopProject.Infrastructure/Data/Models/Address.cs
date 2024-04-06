@@ -29,7 +29,7 @@ namespace PetShopProject.Infrastructure.Data.Models
 
         [Comment("User identifier")]
         [Required]
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; }
 
         [Comment("User entity")]
         [ForeignKey(nameof(UserId))]
