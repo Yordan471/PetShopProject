@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 using static PetShopProject.Common.EntityValidationsConstants.AddressValidations;
 
 namespace PetShopProject.Infrastructure.Data.Models
@@ -27,7 +27,12 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(PostalCodeMaxLength)]
         public string PostalCode { get; set; } = string.Empty;
 
+        [Comment("User identifier")]
+        [Required]
+        public string UserId { get; set; } = string.Empty;
+
         [Comment("User entity")]
+        [ForeignKey(nameof(UserId))]
         public User User { get; set; } = null!;
     }
 }
