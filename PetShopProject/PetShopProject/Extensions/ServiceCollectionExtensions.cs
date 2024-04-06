@@ -48,6 +48,7 @@ namespace PetShopProject.Extensions
                 options.Password.RequiredUniqueChars = config
                 .GetValue<int>("Identity:Password:RequiredUniqueChars");
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<PetShopDbContext>();
             
             return services;
