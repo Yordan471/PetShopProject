@@ -4,6 +4,7 @@ using PetShopProject.Core.Contracts;
 using PetShopProject.Core.Services;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Infrastructure.Data.Models;
+using PetShopProject.Services;
 using static PetShopProject.Common.GlobalConstants;
 
 namespace PetShopProject.Extensions

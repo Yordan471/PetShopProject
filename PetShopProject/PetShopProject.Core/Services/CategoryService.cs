@@ -49,7 +49,7 @@ namespace PetShopProject.Core.Services
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Description = c.Description,
+                    Description = c.Description
                 })
                 .ToListAsync();
 
