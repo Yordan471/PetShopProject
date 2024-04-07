@@ -15,6 +15,12 @@ namespace PetShopProject.Services
             this.dbContext = _dbContext;
         }
 
+        public async Task CreateProduct(Product product)
+        {
+            dbContext.Products.Add(product);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<List<ProductViewModel>> GetAllProductsAsync(string animalType)
         {
             var products = await dbContext.Products

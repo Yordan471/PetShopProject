@@ -56,6 +56,18 @@ namespace PetShopProject.Core.Services
             return categories;
         }
 
+        public async Task<IEnumerable<CategoryForCreateProductViewModel>> GetAllCategoriesForProductCreationAsync()
+        {
+            return await dbContext.Categories
+                .AsNoTracking()
+                .Select(c => new CategoryForCreateProductViewModel()
+            {
+                 Id= c.Id,
+                 Name = c.Name
+            })
+                .ToArrayAsync();  
+        }
+
         public async Task<Category> GetCategoryByIdAsync(int Id)
         {
             Category category = await dbContext.Categories
