@@ -2,7 +2,7 @@
 {
     public static class RoleConstants
     {
-        public const string RoleAdming = "Admin";
+        public const string RoleAdmin = "Admin";
         public const string NormalizedRoleAdmin = "ADMIN";
 
         public const string RoleModerator = "Moderator";
