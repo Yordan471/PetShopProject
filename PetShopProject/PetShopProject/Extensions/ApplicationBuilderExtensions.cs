@@ -33,6 +33,7 @@ namespace Microsoft.AspNetCore.Builder
 
             if (string.IsNullOrEmpty(admin.SecurityStamp))
             {
+               
                 admin.SecurityStamp = Guid.NewGuid().ToString();
                 var updateResult = await userManager.UpdateAsync(admin);
                 if (!updateResult.Succeeded)
