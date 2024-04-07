@@ -27,12 +27,7 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(PostalCodeMaxLength)]
         public string PostalCode { get; set; } = string.Empty;
 
-        [Comment("User identifier")]
-        [Required]
-        public Guid UserId { get; set; }
-
         [Comment("User entity")]
-        [ForeignKey(nameof(UserId))]
         public User User { get; set; } = null!;
     }
 }

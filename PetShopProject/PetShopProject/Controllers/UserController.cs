@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.Core.ViewModels.UserViewModels;
+using System.Security.Claims;
 
 namespace PetShopProject.Controllers
 {
@@ -106,6 +107,8 @@ namespace PetShopProject.Controllers
 
                 if (result.Succeeded)
                 {
+                    await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user.UserName));
+
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -129,7 +132,7 @@ namespace PetShopProject.Controllers
         public IActionResult ExternalLogin(string provider, string? returnUrl = null)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "User", new {returnUrl});
-            var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, returnUrl);
+            var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
 
             return new ChallengeResult(provider, properties);
         }
@@ -157,6 +160,14 @@ namespace PetShopProject.Controllers
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false, false);
             if (result.Succeeded) 
             {
+                var user = await userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
+                if (user != null)
+                {
+                    // Добавяне на Claim за UserName
+                    await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user.UserName));
+                }
+
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
@@ -165,7 +176,7 @@ namespace PetShopProject.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Register));
+                return RedirectToAction(nameof(Register), new {returnUrl});
             }
         }
 
