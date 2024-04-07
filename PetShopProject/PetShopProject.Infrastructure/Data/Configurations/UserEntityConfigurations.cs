@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PetShopProject.Infrastructure.Data.Models;
-using static PetShopProject.Infrastructure.Data.SeedData;
 
 namespace PetShopProject.Infrastructure.Data.Configurations
 {
@@ -38,10 +37,6 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                 .HasOne(u => u.Address)
                 .WithOne(a => a.User)
                 .HasForeignKey<User>(u => u.AddressId);
-
-            SeedData seedData = new();
-
-            builder.HasData(new User[] { seedData.AdminUser });
         }
     }
 }

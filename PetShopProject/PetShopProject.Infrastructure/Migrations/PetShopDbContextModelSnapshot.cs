@@ -48,6 +48,15 @@ namespace PetShopProject.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6f45410f-ae12-46bf-a736-429395a0574d"),
+                            ConcurrencyStamp = "51808c16-04e9-4716-846a-31abc6db4a61",
+                            Name = "Name",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -180,20 +189,15 @@ namespace PetShopProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("Street for registration");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasComment("User identifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
 
                     b.HasComment("Address entity");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Sofia",
-                            PostalCode = "1000",
-                            Street = "ul. Lelin"
-                        });
                 });
 
             modelBuilder.Entity("PetShopProject.Infrastructure.Data.Models.BlogPost", b =>
@@ -927,28 +931,6 @@ namespace PetShopProject.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("98cdd9b2-8c6a-49de-92e0-a1a997d1468e"),
-                            AccessFailedCount = 0,
-                            AddressId = 1,
-                            ConcurrencyStamp = "821119eb-f357-4e58-b935-d30f4a58a016",
-                            ContactPreferance = 0,
-                            Email = "jordan4.71@abv.bg",
-                            EmailConfirmed = false,
-                            FirstName = "Yordan",
-                            LastName = "Ivanov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JORDAN4.71@ABV.BG",
-                            NormalizedUserName = "IVANOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGJqBYgaJGAGcy1iuWNHSyVel5EziV3TLOSGBL87aSM6339gpiZbkyh8BFlGRLEycA==",
-                            PhoneNumberConfirmed = false,
-                            RecipientName = "",
-                            TwoFactorEnabled = false,
-                            UserName = "Ivanov"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

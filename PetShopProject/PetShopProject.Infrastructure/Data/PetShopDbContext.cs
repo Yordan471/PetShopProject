@@ -43,7 +43,18 @@ namespace PetShopProject.Infrastructure.Data
             builder.ApplyConfiguration(new ProductEntityConfigurations());
             builder.ApplyConfiguration(new TagEntityConfigurations());
             builder.ApplyConfiguration(new CategoryConfigurations());
-            builder.ApplyConfiguration(new AddressConfigurations());
+
+            builder
+                .Entity<IdentityRole<Guid>>()
+                .HasData(
+                 new IdentityRole<Guid>
+                     {
+                         Id = new Guid("6f45410f-ae12-46bf-a736-429395a0574d"),
+                         Name = "Name",
+                         NormalizedName = "ADMIN",
+                         ConcurrencyStamp = Guid.NewGuid().ToString(),
+                     }
+                 );
 
             base.OnModelCreating(builder); 
         }
