@@ -38,6 +38,11 @@ namespace PetShopProject.Controllers
         {
             Category category = await categoryService.GetCategoryByIdAsync(Id);
 
+            if (category == null)
+            {
+                return NotFound();
+            }
+
             string type = "Куче";
 
             CategoryViewModel categoryView = new()
@@ -57,12 +62,7 @@ namespace PetShopProject.Controllers
                 .ToList()
             };
 
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
+            return View(categoryView);
         }
 
         [Authorize(Roles = "Admin")]
