@@ -8,7 +8,7 @@ namespace PetShopProject.Common
 {
     public static class EntityValidationsErrorMessages
     {
-        // User
+        // USER
         // Last name registration
         public const string LastNameInccorectLength = "Фамилията трябва да бъде поне {2} и най-много {1} знака.";
         public const string LastNameRequiredErrMessage = "Фамилията е задължителна.";
@@ -51,13 +51,21 @@ namespace PetShopProject.Common
         public const string StreetNumberRequiredErrMessage = "Номерът на улицата е задължителен.";
         public const string StreetNumberInccorectLength = "Номерът на улицата трябва да бъде {2} и най-много {1} знака.";
 
+        // CATEGORY
         // Name Category Create
-        public const string NameCategoryInccorectLength = "Името на категорията трябва да бъде {2} и най-много {1} знака";
+        public const string NameCategoryInccorectLength = "Името на категорията трябва да бъде {2} и най-много {1} знака.";
 
         // Description Category Create
-        public const string DescriptionCategoryInccorectlength = "Описанието на категорията трябва да бъде {2} и най-много {1} знака";
+        public const string DescriptionCategoryInccorectlength = "Описанието на категорията трябва да бъде {2} и най-много {1} знака.";
 
-        // AnimalType Category
-        public const string AnimalTypeCategoryInccorectLength = "Името на вида животно трябва да бъде {2} и най-много {1} знака";
+        // AnimalType Category Create
+        public const string AnimalTypeCategoryInccorectLength = "Името на вида животно трябва да бъде {2} и най-много {1} знака.";
+
+        // PRODUCT
+        // Price Product Create
+        public const string PriceProductInccorectRange = "Цената на продукта трябва да буде {2} и най-много {1} лева.";
+
+        // ImageUrl Product Create
+        public const string ImageUrlProductInccorectLength = "Пътят до снимката на продукта трябва да бъде {2} и най-много {1} знака.";
     }
 }
