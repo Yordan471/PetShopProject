@@ -23,6 +23,11 @@
         public string Price { get; set; }
 
         /// <summary>
+        /// Animal Type (dog, cat, etc)
+        /// </summary>
+        public string AnimalType { get; set; } = string.Empty;
+
+        /// <summary>
         /// Product image url
         /// </summary>
         public string ImageUrl { get; set; } = string.Empty;

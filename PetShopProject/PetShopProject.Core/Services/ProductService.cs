@@ -1,15 +1,10 @@
 ﻿using PetShopProject.Core.Contracts;
 using PetShopProject.Infrastructure.Data;
 using PetShopProject.Infrastructure.Data.Models;
-using PetShopProject.Core.ViewModels.CategoryViewModels;
 using PetShopProject.Core.ViewModels.ProductViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace PetShopProject.Core.Services
+namespace PetShopProject.Services
 {
     public class ProductService : IProductService
     {
@@ -20,25 +15,30 @@ namespace PetShopProject.Core.Services
             this.dbContext = _dbContext;
         }
 
-        //public async Task<IEnumerable<ProductViewModel>> GetAllProductsOfCategoryAsync(int Id)
-        //{
-        //    Category category = await dbContext.Categories.FindAsync(Id);
-
-        //    List<ProductViewModel> products = category.Products.Select(p => new ProductViewModel()
-        //    {
-        //        Name = p.Name,
-        //        Description = p.ShortDescription,
-        //        ImageUrl = p.ImageUrl,
-        //        Price = p.Price.ToString()
-        //    })
-        //        .ToList();
-            
-        //    return products;
-        //}
-
-        public Task<Product> GetProductByIdAsync(int id)
+        public async Task<List<ProductViewModel>> GetAllProductsAsync(string animalType)
         {
-            throw new NotImplementedException();
+            var products = await dbContext.Products
+                .AsNoTracking()
+                .Where(p => p.AnimalType == animalType)
+                .OrderBy(p => p.Name)
+                .Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.ShortDescription,
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price.ToString()
+                })
+                .ToListAsync();
+
+            return products;
+        }
+
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            var product = await dbContext.Products.FindAsync(id);
+
+            return product;
         }
     }
 }

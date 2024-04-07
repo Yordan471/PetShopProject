@@ -1,10 +1,5 @@
 ﻿using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.Core.ViewModels.ProductViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PetShopProject.Core.Contracts
 {
@@ -12,6 +7,6 @@ namespace PetShopProject.Core.Contracts
     {
         public Task<Product> GetProductByIdAsync(int id);
 
-        //public Task<IEnumerable<ProductViewModel>> GetAllProductsOfCategoryAsync(int id);
+        public Task<List<ProductViewModel>> GetAllProductsAsync(string animalType);
     }
 }
