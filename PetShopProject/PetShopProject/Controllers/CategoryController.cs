@@ -4,11 +4,12 @@ using PetShopProject.Core.Services;
 using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.Core.ViewModels.CategoryViewModels;
 using PetShopProject.Core.ViewModels.ProductViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace PetShopProject.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
@@ -19,6 +20,7 @@ namespace PetShopProject.Controllers
             this.categoryService = _categoryService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             IEnumerable<CategoryViewModel> categories = await categoryService.GetAllCategoriesAsync();
@@ -31,6 +33,7 @@ namespace PetShopProject.Controllers
             return View(categories);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int Id)
         {
             Category category = await categoryService.GetCategoryByIdAsync(Id);
@@ -62,6 +65,7 @@ namespace PetShopProject.Controllers
             return View(category);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             CreateCategoryViewModel category = new();
@@ -70,6 +74,7 @@ namespace PetShopProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCategoryViewModel model)
         {
@@ -90,6 +95,7 @@ namespace PetShopProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int Id)
         {
             Category category = await categoryService.GetCategoryByIdAsync(Id);
@@ -110,6 +116,7 @@ namespace PetShopProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int Id)
         {
@@ -117,6 +124,7 @@ namespace PetShopProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var category = await categoryService.GetCategoryByIdAsync(id);
@@ -137,6 +145,7 @@ namespace PetShopProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CategoryEditViewModel category)
         {
