@@ -107,7 +107,7 @@ namespace PetShopProject.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        // GET: Product/Edit/5
+        // GET: Product/Edit
         public async Task<IActionResult> Edit(int id)
         {
             try
@@ -140,7 +140,7 @@ namespace PetShopProject.Areas.Admin.Controllers
             }
         }
 
-        // POST: Product/Edit/
+        // POST: Product/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ProductEditViewModel viewModel)
@@ -182,6 +182,54 @@ namespace PetShopProject.Areas.Admin.Controllers
             viewModel.Categories = await categoryService.GetAllCategoriesForProductCreationAsync();
 
             return View(viewModel);
+        }
+
+        // GET: Product/Delete
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var product = await productService.GetProductByIdAsyncNoTracking(id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+
+                var viewModel = new ProductDeleteViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    ShortDescription = product.ShortDescription,
+                    LongDescription = product.LongDescription,
+                    Price = product.Price,
+                    ImageUrl = product.ImageUrl,
+                    CategoryName = product.Category.Name
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while retrieving the product for deletion.");
+                return StatusCode(500, "An error occurred while retrieving the product. Please try again later.");
+            }
+        }
+
+        // POST: Product/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            try
+            {
+                await productService.DeleteProductAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while deleting the product.");
+                return StatusCode(500, "An error occurred while deleting the product. Please try again later.");
+            }
         }
     }
 }
