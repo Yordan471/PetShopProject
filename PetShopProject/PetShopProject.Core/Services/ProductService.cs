@@ -46,5 +46,11 @@ namespace PetShopProject.Services
 
             return product;
         }
+
+        public async Task UpdateProductAsync(Product product)
+        {
+            dbContext.Entry(product).State = EntityState.Modified;
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

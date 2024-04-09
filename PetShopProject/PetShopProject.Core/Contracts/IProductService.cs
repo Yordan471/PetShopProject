@@ -10,5 +10,7 @@ namespace PetShopProject.Core.Contracts
         public Task<List<ProductViewModel>> GetAllProductsAsync(string animalType);
 
         public Task CreateProduct(Product product);
+
+        public Task UpdateProductAsync(Product product);
     }
 }
