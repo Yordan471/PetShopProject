@@ -17,7 +17,7 @@ namespace PetShopProject.Services
 
         public async Task CreateProduct(Product product)
         {
-            dbContext.Products.Add(product);
+            await dbContext.Products.AddAsync(product);
             await dbContext.SaveChangesAsync();
         }
 
