@@ -6,6 +6,9 @@ using static PetShopProject.Common.EntityValidationsErrorMessages;
 
 namespace PetShopProject.Core.ViewModels.ProductViewModels
 {
+    /// <summary>
+    /// View for editing product
+    /// </summary>
     public class ProductEditViewModel
     {
         /// <summary>

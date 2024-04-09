@@ -1,5 +1,8 @@
 ﻿namespace PetShopProject.Core.ViewModels.ProductViewModels
 {
+    /// <summary>
+    /// General view for product
+    /// </summary>
     public class ProductViewModel
     {
         /// <summary>
