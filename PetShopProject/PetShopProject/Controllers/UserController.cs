@@ -5,6 +5,8 @@ using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.Core.ViewModels.UserViewModels;
 using System.Security.Claims;
 
+using static PetShopProject.Common.RoleConstants;
+
 namespace PetShopProject.Controllers
 {
     public class UserController : BaseController
@@ -122,7 +124,19 @@ namespace PetShopProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+            bool isAdminOrModerator = false;
+
+            if (User.IsInRole(RoleAdmin) || User.IsInRole(RoleModerator))
+            {
+                isAdminOrModerator = true;
+            }
+
             await signInManager.SignOutAsync();
+
+            if (isAdminOrModerator)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             return RedirectToAction("Index", "Home");
         }

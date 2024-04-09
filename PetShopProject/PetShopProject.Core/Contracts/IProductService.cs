@@ -12,5 +12,9 @@ namespace PetShopProject.Core.Contracts
         public Task CreateProduct(Product product);
 
         public Task UpdateProductAsync(Product product);
+
+        public Task DeleteProductAsync(int id);
+
+        public Task<Product> GetProductByIdAsyncNoTracking(int id);
     }
 }

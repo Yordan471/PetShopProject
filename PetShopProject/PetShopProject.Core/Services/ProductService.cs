@@ -21,6 +21,17 @@ namespace PetShopProject.Services
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteProductAsync(int id)
+        {           
+            var product = await dbContext.Products.FindAsync(id);
+           
+            if (product != null)
+            {
+                dbContext.Products.Remove(product);
+                await dbContext.SaveChangesAsync();
+            }
+        }
+    
         public async Task<List<ProductViewModel>> GetAllProductsAsync(string animalType)
         {
             var products = await dbContext.Products
@@ -42,7 +53,19 @@ namespace PetShopProject.Services
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            var product = await dbContext.Products.FindAsync(id);
+            var product = await dbContext.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            return product;
+        }
+
+        public async Task<Product> GetProductByIdAsyncNoTracking(int id)
+        {
+            var product = await dbContext.Products
+                .AsNoTracking()
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             return product;
         }
