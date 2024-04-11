@@ -7,10 +7,12 @@ using PetShopProject.Infrastructure.Data.Models;
 using PetShopProject.Services;
 using System.Collections.Generic;
 using static PetShopProject.Common.GlobalConstants;
+using static PetShopProject.Common.RoleConstants;
 
 namespace PetShopProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = RoleAdmin)]
     public class ProductController : Controller
     {
         private readonly IProductService productService;
