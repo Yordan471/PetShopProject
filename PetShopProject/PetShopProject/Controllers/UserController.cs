@@ -124,19 +124,7 @@ namespace PetShopProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            bool isAdminOrModerator = false;
-
-            if (User.IsInRole(RoleAdmin) || User.IsInRole(RoleModerator))
-            {
-                isAdminOrModerator = true;
-            }
-
             await signInManager.SignOutAsync();
-
-            if (isAdminOrModerator)
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
             return RedirectToAction("Index", "Home");
         }
