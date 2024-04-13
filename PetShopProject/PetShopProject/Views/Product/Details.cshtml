@@ -10,51 +10,19 @@
         <p class="card-text">@Model.Description</p>
 
         <div class="form-group">
-            <label for="quantity">Количество:</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <button id="decreaseQuantity" class="btn btn-outline-secondary" type="button">-</button>
-                </div>
-                <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control" />
-                <div class="input-group-append">
-                    <button id="increaseQuantity" class="btn btn-outline-secondary" type="button">+</button>
-                </div>
-            </div>
+            <label for="quantity">Количество:</label>           
         </div>
         <div class="form-group">
             <label>Налично количество: @Model.Quantity</label>
         </div>
-
-        <button id="addToCart" class="btn btn-primary">Добави в количка</button>
+        <form>
+            <input type="hidden" name="productId" value="@Model.Id" />
+            <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control" />
+            <button asp-action="AddToCart" asp-controller="Cart" id="addToCart" type="submit" class="btn btn-primary">Добави в количка</button>
+        </form>
     </div>
 </div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            var quantityInput = $('#quantity');
-
-            $('#decreaseQuantity').click(function () {
-                var currentQuantity = parseInt(quantityInput.val());
-                if (currentQuantity > 1) {
-                    quantityInput.val(currentQuantity - 1);
-                }
-            });
-
-            $('#increaseQuantity').click(function () {
-                var currentQuantity = parseInt(quantityInput.val());
-                quantityInput.val(currentQuantity + 1);
-            });
-
-            $('#addToCart').click(function () {
-                var productId = @Model.Id;
-                var quantity = parseInt(quantityInput.val());
-                // Добавяне на продукта в количката
-                console.log('Продуктът с ID ' + productId + ' е добавен в количката. Количество: ' + quantity);
-            });
-        });
-    </script>
-}
 
 <style>
     .card-img-container {
