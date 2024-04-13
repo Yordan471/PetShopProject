@@ -38,26 +38,16 @@ namespace PetShopProject.Areas.Admin.Controllers
                 return BadRequest();
             }
 
-            //List<ProductViewModel> catProducts = await productService
-            //    .GetAllProductsAsync(AnimalTypeCat);
+            List<ProductViewModel> catProducts = await productService
+                .GetAllProductsAsync(AnimalTypeCat);
 
-            //if (catProducts == null)
-            //{
-            //    logger.LogWarning($"No products found for animal type {AnimalTypeCat}");
-            //    return BadRequest();
-            //}
+            if (catProducts == null)
+            {
+                logger.LogWarning($"No products found for animal type {AnimalTypeCat}");
+                return BadRequest();
+            }
 
-            //List<ProductViewModel> birdProducts = await productService
-            //   .GetAllProductsAsync(AnimalTypeBird);
-
-            //if (catProducts == null)
-            //{
-            //    logger.LogWarning($"No products found for animal type {AnimalTypeBird}");
-            //    return BadRequest();
-            //}
-
-            //dogProducts.AddRange(catProducts);
-            //dogProducts.AddRange(birdProducts);
+            dogProducts.AddRange(catProducts);
 
             return View(dogProducts);
         }
