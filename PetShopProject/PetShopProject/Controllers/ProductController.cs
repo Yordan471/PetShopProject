@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetShopProject.Core.Contracts;
 using PetShopProject.Core.ViewModels.ProductViewModels;
 
 namespace PetShopProject.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private readonly IProductService productService;
 
@@ -13,11 +14,7 @@ namespace PetShopProject.Controllers
             this.productService = _productService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var product = await productService.GetProductByIdAsync(id);
@@ -29,6 +26,7 @@ namespace PetShopProject.Controllers
 
             ProductViewModel viewModel = new()
             {
+                Id = id,
                 Name = product.Name,
                 Description = product.LongDescription,
                 Price = product.Price.ToString(),
