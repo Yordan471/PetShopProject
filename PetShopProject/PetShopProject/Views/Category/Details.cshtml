@@ -12,7 +12,7 @@
                 <p class="card-text">@product.Description</p>
                 <p class="card-text">Price: @product.Price</p>
                 <div class="card-actions">
-                    <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-primary">View Details</a>
+                    <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" asp-route-animalType="@ViewData["AnimalType"]" class="btn btn-primary">View Details</a>
                     <form method="post" action="@Url.Action("AddToCart", "Cart")">
                         <input type="hidden" name="productId" value="@product.Id" />
                         <button type="submit" class="btn btn-success">Add to Cart</button>

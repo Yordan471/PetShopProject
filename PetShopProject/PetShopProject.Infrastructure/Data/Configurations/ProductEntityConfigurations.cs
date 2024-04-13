@@ -414,7 +414,7 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                     ShortDescription = "Консервирана храна за котки в желе",
                     Price = 2.99m,
                     Quantity = 500,
-                    ImageUrl = "/Images/Products/Cats/WetFoods/royalcanin_instinctivein_gelee.jpg",
+                    ImageUrl = "~/Images/Products/Cats/WetFoods/royalcanin_instinctivein_gelee.jpg",
                     AnimalType = "Котка",
                     CategoryId = 2
                 },
@@ -426,7 +426,7 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                     ShortDescription = "Консервирана храна за възрастни котки",
                     Price = 1.99m,
                     Quantity = 500,
-                    ImageUrl = "/Images/Products/Cats/WetFoods/whiskas_pauch_pileshko_meso.jpg",
+                    ImageUrl = "~/Images/Products/Cats/WetFoods/whiskas_pauch_pileshko_meso.jpg",
                     AnimalType = "Котка",
                     CategoryId = 2
                 },
@@ -438,7 +438,7 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                     ShortDescription = "Консервирана храна за котки с говеждо",
                     Price = 2.49m,
                     Quantity = 500,
-                    ImageUrl = "/Images/Products/Cats/WetFoods/Purina_Felix_Fantastic.jpg",
+                    ImageUrl = "~/Images/Products/Cats/WetFoods/Purina_Felix_Fantastic.jpg",
                     AnimalType = "Котка",
                     CategoryId = 2
                 },
@@ -450,7 +450,7 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                     ShortDescription = "Консервирана храна за възрастни котки",
                     Price = 3.29m,
                     Quantity = 500,
-                    ImageUrl = "/Images/Products/Cats/WetFoods/animonda_vomfeinsten_adult.jpg",
+                    ImageUrl = "~/Images/Products/Cats/WetFoods/animonda_vomfeinsten_adult.jpg",
                     AnimalType = "Котка",
                     CategoryId = 2
                 },
@@ -462,7 +462,7 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                     ShortDescription = "Консервирана храна за котки с риба тон",
                     Price = 3.99m,
                     Quantity = 500,
-                    ImageUrl = "/Images/Products/Cats/WetFoods/hills_science_plan_dult_cat_wet_food.jpg",
+                    ImageUrl = "~/Images/Products/Cats/WetFoods/hills_science_plan_dult_cat_wet_food.jpg",
                     AnimalType = "Котка",
                     CategoryId = 2
                 }

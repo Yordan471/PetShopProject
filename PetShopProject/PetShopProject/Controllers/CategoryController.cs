@@ -6,6 +6,8 @@ using PetShopProject.Core.ViewModels.CategoryViewModels;
 using PetShopProject.Core.ViewModels.ProductViewModels;
 using Microsoft.AspNetCore.Authorization;
 
+using static PetShopProject.Common.GlobalConstants;
+
 
 namespace PetShopProject.Controllers
 {
@@ -21,9 +23,11 @@ namespace PetShopProject.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string animalType)
         {
             IEnumerable<CategoryViewModel> categories = await categoryService.GetAllCategoriesAsync();
+
+            ViewData["AnimalType"] = animalType;
 
             if (categories == null)
             {
@@ -34,7 +38,7 @@ namespace PetShopProject.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int Id)
+        public async Task<IActionResult> Details(int Id, string animalType)
         {
             Category category = await categoryService.GetCategoryByIdAsync(Id);
 
@@ -43,14 +47,12 @@ namespace PetShopProject.Controllers
                 return NotFound();
             }
 
-            string type = "Куче";
-
             CategoryViewModel categoryView = new()
             {
                 Name = category.Name,
                 Description = category.Description,
                 Products = category.Products
-                .Where(p => p.AnimalType == type)
+                .Where(p => p.AnimalType == animalType)
                 .Select(p => new ProductViewModel
                 {
                     Id = p.Id,

@@ -27,6 +27,12 @@ namespace PetShopProject.Core.ViewModels.CategoryViewModels
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
+        /// Animal type
+        /// </summary>
+        public string AnimalType { get; set; } = string.Empty;
+
+
+        /// <summary>
         /// All products of a category
         /// </summary>
         public IEnumerable<ProductViewModel> Products { get; set; }

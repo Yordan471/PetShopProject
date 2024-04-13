@@ -30,7 +30,7 @@
                     <td>@category.Name</td>
                     <td>@category.Description</td>
                     <td>
-                        <a asp-controller="Category" asp-action="Details" asp-route-id="@category.Id">Details</a>
+                        <a asp-controller="Category" asp-action="Details" asp-route-id="@category.Id" asp-route-animalType="@ViewData["AnimalType"]">Details</a>
                         @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                         {
                             <span> | </span>
