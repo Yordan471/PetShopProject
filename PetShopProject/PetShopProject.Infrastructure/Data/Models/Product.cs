@@ -42,6 +42,10 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = string.Empty;
 
+        [Comment("Product quantity in store")]
+        [Required]
+        public int Quantity { get; set; }
+
         [Comment("Animal type")]
         [MaxLength(AnimalTypeMaxLength)]
         [Required]
