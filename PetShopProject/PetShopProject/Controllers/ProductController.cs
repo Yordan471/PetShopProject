@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetShopProject.Core.Contracts;
+using PetShopProject.Core.ViewModels.ProductViewModels;
 
 namespace PetShopProject.Controllers
 {
@@ -26,7 +27,16 @@ namespace PetShopProject.Controllers
                 return NotFound();
             }
 
-            return View(product);
+            ProductViewModel viewModel = new()
+            {
+                Name = product.Name,
+                Description = product.LongDescription,
+                Price = product.Price.ToString(),
+                Quantity = product.Quantity,
+                ImageUrl = product.ImageUrl
+            };
+
+            return View(viewModel);
         }
     }
 }
