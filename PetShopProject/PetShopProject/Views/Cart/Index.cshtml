@@ -1,0 +1,44 @@
+﻿@model List<CartViewModel>
+
+<h2>Моята количка</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Вашата количка е празна.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <form asp-action="Remove" asp-controller="Cart" method="post">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Премахни</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="Update" asp-controller="Cart" method="post">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control" />
+                            <button type="submit" class="btn btn-primary">Промени</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
