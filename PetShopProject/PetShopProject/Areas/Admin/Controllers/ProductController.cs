@@ -88,6 +88,7 @@ namespace PetShopProject.Areas.Admin.Controllers
                         LongDescription = viewModel.LongDescription,
                         ShortDescription = viewModel.ShortDescription,
                         Price = viewModel.Price,
+                        Quantity = viewModel.Quantity,
                         ImageUrl = viewModel.ImageUrl,
                         AnimalType = viewModel.AnimalType,
                         CategoryId = viewModel.CategoryId
@@ -127,6 +128,7 @@ namespace PetShopProject.Areas.Admin.Controllers
                     ShortDescription = product.ShortDescription,
                     LongDescription = product.LongDescription,
                     Price = product.Price,
+                    Quantity = product.Quantity,
                     ImageUrl = product.ImageUrl,
                     AnimalType = product.AnimalType,
                     CategoryId = product.CategoryId,
@@ -204,6 +206,7 @@ namespace PetShopProject.Areas.Admin.Controllers
                     ShortDescription = product.ShortDescription,
                     LongDescription = product.LongDescription,
                     Price = product.Price,
+                    Quantity = product.Quantity,
                     ImageUrl = product.ImageUrl,
                     CategoryName = product.Category.Name
                 };
