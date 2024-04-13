@@ -1,22 +1,33 @@
 ﻿@model ProductViewModel
 
-<h2>@Model.Name</h2>
+<div class="card">
+    <div class="card-img-container">
+        <img src="@Url.Content(Model.ImageUrl)" class="card-img-top" alt="@Model.Name">
+    </div>
+    <div class="card-body">
+        <h2 class="card-title">@Model.Name</h2>
+        <p class="card-text">Цена: @Model.Price</p>
+        <p class="card-text">@Model.Description</p>
 
-<div>
-    <p>Цена: @Model.Price.ToString()</p>
-    <p>@Model.Description</p>
-</div>
+        <div class="form-group">
+            <label for="quantity">Количество:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button id="decreaseQuantity" class="btn btn-outline-secondary" type="button">-</button>
+                </div>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control" />
+                <div class="input-group-append">
+                    <button id="increaseQuantity" class="btn btn-outline-secondary" type="button">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Налично количество: @Model.Quantity</label>
+        </div>
 
-<div>
-    <label for="quantity">Количество:</label>
-    <div>
-        <button id="decreaseQuantity" class="btn btn-secondary">-</button>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control" />
-        <button id="increaseQuantity" class="btn btn-secondary">+</button>
+        <button id="addToCart" class="btn btn-primary">Добави в количка</button>
     </div>
 </div>
-
-<button id="addToCart" class="btn btn-primary">Добави в количка</button>
 
 @section Scripts {
     <script>
@@ -44,3 +55,16 @@
         });
     </script>
 }
+
+<style>
+    .card-img-container {
+        height: 300px; /* Увеличете височината според нуждите */
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+</style>
