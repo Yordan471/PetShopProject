@@ -39,6 +39,8 @@ namespace PetShopProject.Common
             public const int ShortDescriptionMinLength = 5;
             public const double PriceMaxValue = 10000;
             public const double PriceMinValue = 0;
+            public const int QuantityMaxValue = 10000;
+            public const int QuantityMinValue = 0;
             public const int ImageUrlMaxLength = 2048;
             public const int ImageUrlMinLength = 5;
             public const int AnimalTypeMaxLength = 25;

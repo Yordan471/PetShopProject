@@ -18,4 +18,5 @@ namespace PetShopProject.Common
         public const string AnimalTypeCat = "Котка";
         public const string AnimalTypeBird = "Птица";
     }
+
 }

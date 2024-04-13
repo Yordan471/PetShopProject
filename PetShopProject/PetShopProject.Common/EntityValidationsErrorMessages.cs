@@ -67,5 +67,8 @@ namespace PetShopProject.Common
 
         // ImageUrl Product Create
         public const string ImageUrlProductInccorectLength = "Пътят до снимката на продукта трябва да бъде {2} и най-много {1} знака.";
+
+        // Quantity Product Create
+        public const string QuantityProductInccorectRange = "Количеството на продукта трябва да бъде {2} и най-много {1} бройки.";
     }
 }
