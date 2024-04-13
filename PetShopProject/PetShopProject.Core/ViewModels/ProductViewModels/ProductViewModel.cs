@@ -26,6 +26,11 @@
         public string Price { get; set; }
 
         /// <summary>
+        /// Product quantity
+        /// </summary>
+        public int Quantity { get; set; }
+
+        /// <summary>
         /// Animal Type (dog, cat, etc)
         /// </summary>
         public string AnimalType { get; set; } = string.Empty;

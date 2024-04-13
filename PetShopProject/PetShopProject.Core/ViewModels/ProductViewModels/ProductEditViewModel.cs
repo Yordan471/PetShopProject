@@ -50,6 +50,14 @@ namespace PetShopProject.Core.ViewModels.ProductViewModels
         public decimal Price { get; set; }
 
         /// <summary>
+        /// Product quantity in store
+        /// </summary>
+        [Required]
+        [Range(QuantityMinValue, QuantityMaxValue, 
+            ErrorMessage = QuantityProductInccorectRange)]
+        public int Quantity { get; set; }
+
+        /// <summary>
         /// Image url for product
         /// </summary>
         [Required]

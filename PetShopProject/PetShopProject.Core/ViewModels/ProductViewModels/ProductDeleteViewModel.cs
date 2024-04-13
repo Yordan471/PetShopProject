@@ -26,6 +26,9 @@ namespace PetShopProject.Core.ViewModels.ProductViewModels
         [Display(Name = "Product Price")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Product Quantity")]
+        public int Quantity { get; set; }
+
         [Display(Name = "Image Url")]
         public string ImageUrl { get; set; }
 
