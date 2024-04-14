@@ -30,6 +30,7 @@ namespace PetShopProject.Infrastructure.Data
                 NormalizedUserName = "IVANOV",
                 Email = "jordan4.71@abv.bg",
                 NormalizedEmail = "JORDAN4.71@ABV.BG",
+                BankAccountAmount = 10000,
                 AddressId = 1
             };
 
