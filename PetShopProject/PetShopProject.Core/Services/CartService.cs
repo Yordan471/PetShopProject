@@ -18,10 +18,12 @@ namespace PetShopProject.Core.Services
     public class CartService : ICartService
     {
         private readonly PetShopDbContext dbContext;
+        private readonly ILogger<CartService> logger;
 
-        public CartService(PetShopDbContext _dbContext)
+        public CartService(PetShopDbContext _dbContext, ILogger<CartService> _logger)
         {
             dbContext = _dbContext;
+            this.logger = _logger;
         }
 
         public async Task AddCartItemToDb(CartItem cartItem)
@@ -85,6 +87,34 @@ namespace PetShopProject.Core.Services
 
             cartItem.Quantity = quantity;
             cartItem.Product.Quantity -= quantity;
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<CartCheckoutViewModel>> GetCartItemsAsync(Guid userId)
+        {
+            var cartChecoutItems = await dbContext.CartItems
+                .Where(ci => ci.CustummerId == userId)
+                .Select(ci => new CartCheckoutViewModel()
+                {
+                    Id = ci.Id,
+                    ProductId = ci.ProductId,
+                    ProductName = ci.Product.Name,
+                    Quantity = ci.Quantity,
+                    Price = ci.Product.Price,
+                    Total = ci.Product.Price * ci.Quantity
+                })
+                .ToListAsync();
+
+            return cartChecoutItems;
+        }
+
+        public async Task ClearCartAsync(Guid userId)
+        {
+            var cartItems = await dbContext.CartItems
+            .Where(item => item.CustummerId == userId)
+            .ToListAsync();
+
+            dbContext.CartItems.RemoveRange(cartItems);
             await dbContext.SaveChangesAsync();
         }
     }

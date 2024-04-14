@@ -23,5 +23,9 @@ namespace PetShopProject.Core.Contracts
         public Task AddCartItemToDb(CartItem cartItem);
 
         public Task IncreaseQuantityCartItemAsync(CartItem cartItem, int quantity);
+
+        public Task<List<CartCheckoutViewModel>> GetCartItemsAsync(Guid userId);
+
+        public Task ClearCartAsync(Guid userId);
     }
 }
