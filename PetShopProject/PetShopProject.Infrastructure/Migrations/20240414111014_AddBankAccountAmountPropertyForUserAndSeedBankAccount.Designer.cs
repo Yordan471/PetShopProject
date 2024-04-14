@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShopProject.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using PetShopProject.Infrastructure.Data;
 namespace PetShopProject.Infrastructure.Migrations
 {
     [DbContext(typeof(PetShopDbContext))]
-    partial class PetShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414111014_AddBankAccountAmountPropertyForUserAndSeedBankAccount")]
+    partial class AddBankAccountAmountPropertyForUserAndSeedBankAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -40,6 +40,10 @@ namespace PetShopProject.Infrastructure.Data.Models
         [MaxLength(RecipientNameMaxLength)]
         public string RecipientName { get; set; } = string.Empty;
 
+        [Comment("User's money")]
+        [Required]
+        public decimal BankAccountAmount { get; set; }
+
         public ContactPreference ContactPreferance { get; set; }
 
         [Comment("User's collection of orders")]

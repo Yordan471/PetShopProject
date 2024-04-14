@@ -39,6 +39,10 @@ namespace PetShopProject.Infrastructure.Data.Configurations
                 .WithOne(a => a.User)
                 .HasForeignKey<User>(u => u.AddressId);
 
+            builder
+                .Property(u => u.BankAccountAmount)
+                .HasPrecision(18, 2);
+
             SeedData seedData = new();
 
             builder.HasData(new User[] { seedData.AdminUser });
