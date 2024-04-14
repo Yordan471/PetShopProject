@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4">Thank You for Your Purchase!</h1>
+            <p class="lead">Your order has been successfully processed.</p>
+            <hr>
+            <p>We appreciate your business and look forward to serving you again in the future.</p>
+            <p>If you have any questions or concerns regarding your order, please don't hesitate to contact us.</p>
+            <p>Have a great day!</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    hr {
+        border-top: 2px solid #28a745;
+        width: 50%;
+        margin: 20px auto;
+    }
+
+    .btn-primary {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+</style>
