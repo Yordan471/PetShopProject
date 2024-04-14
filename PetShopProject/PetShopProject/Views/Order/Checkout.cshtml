@@ -1,0 +1,42 @@
+﻿@model OrderCheckoutViewModel
+
+<h2>Checkout</h2>
+
+<form asp-action="PlaceOrder" asp-controller="Order" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.CartItems.Count; i++)
+            {
+                <tr>
+                    <td>@Model.CartItems[i].ProductName</td>
+                    <td>@Model.CartItems[i].Price.ToString("C")</td>
+                    <td>@Model.CartItems[i].Quantity</td>
+                    <td>@((Model.CartItems[i].Price * Model.CartItems[i].Quantity).ToString("C"))</td>
+                    <input type="hidden" name="CartItems[@i].ProductId" value="@Model.CartItems[i].ProductId" />
+                    <input type="hidden" name="CartItems[@i].ProductName" value="@Model.CartItems[i].ProductName" />
+                    <input type="hidden" name="CartItems[@i].Price" value="@Model.CartItems[i].Price" />
+                    <input type="hidden" name="CartItems[@i].Quantity" value="@Model.CartItems[i].Quantity" />
+                    <input type="hidden" name="CartItems[@i].TotalSum" value="@(Model.CartItems[i].Price * Model.CartItems[i].Quantity)" />
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td>@Model.TotalPrice.ToString("C")</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    </div>
+</form>
