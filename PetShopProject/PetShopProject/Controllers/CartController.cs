@@ -90,7 +90,7 @@ namespace PetShopProject.Controllers
                     CustummerId = Guid.Parse(userId),
                     ProductId = productId,
                     Product = await productService.GetProductByIdAsync(productId),
-                    Quantity = quantity
+                    Quantity = quantity                   
                 };
 
                 

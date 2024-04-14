@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PetShopProject.Core.Contracts;
 using PetShopProject.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,20 @@ namespace PetShopProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService homeService;
+        private readonly ILogger<HomeController> logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> _logger, IHomeService _homeService)
         {
-            _logger = logger;
+            this.logger = _logger;
+            this.homeService = _homeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var viewModel = await homeService.GetProductsByAnimalAndCategoryAsync();
+           
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
