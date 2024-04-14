@@ -15,7 +15,9 @@ namespace PetShopProject.Common
             public const int LastNameMaxLength = 50;
             public const int LastNameMinLength = 2;
             public const int RecipientNameMaxLength = 50;
-            public const int RecipientNameMinLength = 2;    
+            public const int RecipientNameMinLength = 2;
+            public const double BankAccountAmountMaxValue = 100000;
+            public const double BankAccountAmountMinValue = 0;
         }
 
         public static class AddressValidations

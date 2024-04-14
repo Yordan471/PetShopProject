@@ -5,11 +5,11 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopProject", "PetShopProject\PetShopProject.csproj", "{A462741C-972B-467B-9EF1-D02D5D1D57DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopProject.Core", "PetShopProject.Core\PetShopProject.Core.csproj", "{5DBD8762-2C91-4C54-8301-FA985B9B837D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopProject.Core", "PetShopProject.Core\PetShopProject.Core.csproj", "{5DBD8762-2C91-4C54-8301-FA985B9B837D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopProject.Infrastructure", "PetShopProject.Infrastructure\PetShopProject.Infrastructure.csproj", "{DEE81F42-74EF-4D22-8D5C-30DD1ED4FD9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopProject.Infrastructure", "PetShopProject.Infrastructure\PetShopProject.Infrastructure.csproj", "{DEE81F42-74EF-4D22-8D5C-30DD1ED4FD9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopProject.Common", "PetShopProject.Common\PetShopProject.Common.csproj", "{0663305D-A464-4CDB-88C7-EDB16ECDB8CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopProject.Common", "PetShopProject.Common\PetShopProject.Common.csproj", "{0663305D-A464-4CDB-88C7-EDB16ECDB8CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
