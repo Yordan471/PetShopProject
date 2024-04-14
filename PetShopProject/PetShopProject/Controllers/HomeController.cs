@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetShopProject.Core.Contracts;
 using PetShopProject.Models;
 using System.Diagnostics;
 
 namespace PetShopProject.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IHomeService homeService;
         private readonly ILogger<HomeController> logger;
@@ -16,6 +17,7 @@ namespace PetShopProject.Controllers
             this.homeService = _homeService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var viewModel = await homeService.GetProductsByAnimalAndCategoryAsync();
@@ -23,6 +25,7 @@ namespace PetShopProject.Controllers
             return View(viewModel);
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
