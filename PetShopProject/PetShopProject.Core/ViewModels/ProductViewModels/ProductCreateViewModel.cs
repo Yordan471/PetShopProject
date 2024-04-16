@@ -47,7 +47,7 @@ namespace PetShopProject.Core.ViewModels.ProductViewModels
         /// Product quantity for store
         /// </summary>
         [Required]
-        [Range(QuantityMaxValue, QuantityMinValue,
+        [Range(QuantityMinValue, QuantityMaxValue, 
             ErrorMessage = QuantityProductInccorectRange)]
         public int Quantity { get; set; }
 
