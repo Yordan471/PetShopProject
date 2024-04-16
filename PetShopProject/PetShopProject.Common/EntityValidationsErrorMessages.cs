@@ -51,6 +51,10 @@ namespace PetShopProject.Common
         public const string StreetNumberRequiredErrMessage = "Номерът на улицата е задължителен.";
         public const string StreetNumberInccorectLength = "Номерът на улицата трябва да бъде {2} и най-много {1} знака.";
 
+        // BankAccountAmoun register
+        public const string BankAccountAmountRequiredErrMessage = "Стойността на парите е задължителна"; 
+        public const string BankAccountAmountInccorectRange = "Стойността на парите трябва да е между {2} и {1} лева.";
+
         // CATEGORY
         // Name Category Create
         public const string NameCategoryInccorectLength = "Името на категорията трябва да бъде {2} и най-много {1} знака.";

@@ -5,6 +5,7 @@ using static PetShopProject.Common.EntityValidationsErrorMessages;
 using static PetShopProject.Common.GlobalConstants;
 using static PetShopProject.Common.GlobalConstantsErrorMessages;
 
+
 namespace PetShopProject.Core.ViewModels.UserViewModels
 {
     /// <summary>
@@ -69,6 +70,15 @@ namespace PetShopProject.Core.ViewModels.UserViewModels
         [Compare("Password", ErrorMessage = ConfirmPasswordCompareErrMessage)]
         [Display(Name = "Потвърди парола")]
         public string ConfirmPassword { get; set; } = string.Empty;
+
+        /// <summary>
+        /// User's Bank account amount
+        /// </summary>
+        [Required(ErrorMessage = BankAccountAmountRequiredErrMessage)]
+        [Range(BankAccountAmountMinValue, BankAccountAmountMaxValue,
+            ErrorMessage = BankAccountAmountInccorectRange)]
+        [Display(Name = "Пари")]
+        public decimal BankAccountAmount { get; set; }
 
         /// <summary>
         /// Phone number of the user for registration
