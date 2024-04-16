@@ -56,8 +56,7 @@ namespace PetShopProject.Areas.Admin.Controllers
         {
             var viewModel = new ProductCreateViewModel
             {
-                Categories = await categoryService.GetAllCategoriesForProductCreationAsync()
-                
+                Categories = await categoryService.GetAllCategoriesForProductCreationAsync()               
             };
 
             return View(viewModel);
