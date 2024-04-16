@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mt-4 mb-4 text-center">Welcome, Admin!</h1>
+            <div class="card">
+                <div class="card-body">
+                    <p class="lead">As an administrator, you have access to various management features and tools to oversee the Pet Shop system.</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-plus-circle"></i> Create Product</h5>
+                                    <p class="card-text">Add a new product to the Pet Shop inventory.</p>
+                                    <a href="@Url.Action("Create", "Product", new { area = "Admin" })" class="btn btn-primary">Create New Product</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-list"></i> All Products</h5>
+                                    <p class="card-text">View and manage all products in the Pet Shop.</p>
+                                    <a href="@Url.Action("Index", "Product", new { area = "Admin" })" class="btn btn-primary">View All Products</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle"></i> Coming Soon: Order Approval Link
+                    </div>
+                    <p>We are excited to announce that a new feature is currently in development, which will allow you to easily approve pending orders with just a click of a button.</p>
+                    <p>The "Order Approval" link will be added to the admin dashboard in the near future, streamlining your order management process and saving you valuable time.</p>
+                    <p>Stay tuned for updates on this upcoming enhancement!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
