@@ -73,7 +73,8 @@ namespace PetShopProject.Controllers
         {
             if (!User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("Login", "User");
+                string returnUrl = Url.Action("AddToCart", "Cart", new { productId, quantity });
+                return RedirectToAction("Login", "User", new {returnUrl});
             }
 
             // Get current user id

@@ -77,12 +77,14 @@ namespace PetShopProject.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(string returnUrl = null)
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            ViewData["ReturnUrl"] = returnUrl;
 
             LoginViewModel model = new()
             {
@@ -94,7 +96,7 @@ namespace PetShopProject.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +113,14 @@ namespace PetShopProject.Controllers
                 {
                     await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user.UserName));
 
-                    return RedirectToAction("Index", "Home");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
             }
 
