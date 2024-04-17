@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NuGet.Packaging;
 using PetShopProject.Core.Contracts;
+using PetShopProject.Core.ViewModels.CartViewModels;
 using PetShopProject.Infrastructure.Data.Models;
 using System.Security.Claims;
 
@@ -25,11 +26,40 @@ namespace PetShopProject.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Get current user
+            if (!User?.Identity?.IsAuthenticated ?? false)
+            {
+                // Потребителят не е удостоверен, пренасочи към страницата за вход
+                return RedirectToAction("Login", "User");
+            }
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Get current user cart items from db
-            var cartItems = await cartService.GetAllCartProductsForUser(Guid.Parse(userId));
+            if (string.IsNullOrEmpty(userId))
+            {
+                // Невалиден потребителски идентификатор, покажи съобщение за грешка
+                TempData["ErrorMessage"] = "Invalid user ID. Please log in again.";
+                return RedirectToAction("Login", "User");
+            }
+
+            IEnumerable<CartViewModel> cartItems;
+
+            try
+            {
+                cartItems = await cartService.GetAllCartProductsForUser(Guid.Parse(userId));
+            }
+            catch (Exception ex)
+            {
+                // Грешка при извличане на продуктите от количката, покажи съобщение за грешка
+                logger.LogError(ex, "An error occurred while retrieving cart items.");
+                TempData["ErrorMessage"] = "An error occurred while retrieving your cart. Please try again later.";
+                return View("Error500");
+            }
+
+            if (!cartItems.Any())
+            {
+                // Количката е празна, покажи съобщение на потребителя
+                TempData["InfoMessage"] = "Your cart is empty.";
+            }
 
             return View(cartItems);
         }
@@ -37,16 +67,31 @@ namespace PetShopProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(int id, int quantity)
         {
-            // Get cart item by id and update the quantity
+            // Валидиране на входните данни
+            if (id <= 0 || quantity < 1)
+            {
+                return RedirectToAction("Index");
+            }
+
             var cartItem = await cartService.GetCartItemAsync(id);
 
             if (cartItem == null)
             {
-                logger.LogWarning("Cart item {id} doesn't exist", id);
-                return RedirectToAction("Index");
+                TempData["ErrorMessage"] = "Cart item not found";
+                View("Error404");
             }
 
-            await cartService.Update(cartItem, quantity);
+            try
+            {
+                // Извикване на услугата за актуализиране на количката
+                await cartService.Update(cartItem, quantity);                
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while updating cart item {id} with quantity {quantity}.", id, quantity);
+                TempData["ErrorMessage"] = "An error occurred while updating the cart item. Please try again later.";
+                return View("Error505");
+            }
 
             return RedirectToAction("Index");
         }
@@ -54,15 +99,29 @@ namespace PetShopProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Remove(int id)
         {
-            // Get Cart Item from db and remove it
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var cartItem = await cartService.GetCartItemAsync(id);
             if (cartItem == null)
             {
                 logger.LogWarning("Cart item {id} doesn't exist", id);
-                return RedirectToAction("Index");
+                TempData["ErrorMessage"] = "Cart item doesn't exist";
+                return View("Error404");
             }
 
-            await cartService.Remove(cartItem);
+            try
+            {
+                await cartService.Remove(cartItem);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error removing cart item {id}", id);
+                TempData["ErrorMessage"] = $"Error removing cart item {id}";
+                return View("Error505");
+            }
 
             return RedirectToAction("Index");
         }
