@@ -28,38 +28,61 @@ namespace PetShopProject.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Dog products
-            List<ProductViewModel> dogProducts = await productService
+            IEnumerable<ProductViewModel> dogProducts = await productService
                 .GetAllProductsAsync(AnimalTypeDog);
 
-            if (dogProducts == null)
+            if (!dogProducts.Any())
             {
                 logger.LogWarning($"No products found for animal type {AnimalTypeDog}");
-                return BadRequest();
+            }
+            else
+            {
+                logger.LogInformation($"Successfully retrieved {dogProducts.Count()} products for animal type {AnimalTypeDog}");
             }
 
-            List<ProductViewModel> catProducts = await productService
+            IEnumerable<ProductViewModel> catProducts = await productService
                 .GetAllProductsAsync(AnimalTypeCat);
 
-            if (catProducts == null)
+            if (!catProducts.Any())
             {
                 logger.LogWarning($"No products found for animal type {AnimalTypeCat}");
-                return BadRequest();
+            }
+            else
+            {
+                logger.LogInformation($"Successfully retrieved {catProducts.Count()} products for animal type {AnimalTypeCat}");
             }
 
-            dogProducts.AddRange(catProducts);
+            var allProducts = dogProducts.Concat(catProducts);
 
-            return View(dogProducts);
+            return View(allProducts);
         }
 
         public async Task<IActionResult> Create()
         {
-            var viewModel = new ProductCreateViewModel
+            try
             {
-                Categories = await categoryService.GetAllCategoriesForProductCreationAsync()               
-            };
+                var categories = await categoryService.GetAllCategoriesForProductCreationAsync();
 
-            return View(viewModel);
+                if (!categories.Any())
+                {
+                    logger.LogWarning("No categories found for product creation.");
+                    return NotFound();
+                }
+
+                var viewModel = new ProductCreateViewModel
+                {
+                    Categories = categories
+                };
+
+                logger.LogInformation($"ProductCreateViewModel created with {categories.Count()} categories.");
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while retrieving categories for product creation.");
+                return View("Error500");
+            }
         }
 
         // POST: Product/Create
@@ -107,7 +130,7 @@ namespace PetShopProject.Areas.Admin.Controllers
                 var product = await productService.GetProductByIdAsync(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return View("Error404");
                 }
 
                 var viewModel = new ProductEditViewModel
@@ -129,7 +152,7 @@ namespace PetShopProject.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex, "An error occurred while retrieving the product for editing.");
-                return StatusCode(500, "An error occurred while retrieving the product. Please try again later.");
+                return View("Error500");
             }
         }
 
@@ -140,7 +163,7 @@ namespace PetShopProject.Areas.Admin.Controllers
         {
             if (id != viewModel.Id)
             {
-                return NotFound();
+                return View("Error404");
             }
 
             if (ModelState.IsValid)
@@ -150,7 +173,7 @@ namespace PetShopProject.Areas.Admin.Controllers
                     var product = await productService.GetProductByIdAsync(id);
                     if (product == null)
                     {
-                        return NotFound();
+                        return View("Error404");
                     }
 
                     product.Name = viewModel.Name;
@@ -185,7 +208,7 @@ namespace PetShopProject.Areas.Admin.Controllers
                 var product = await productService.GetProductByIdAsyncNoTracking(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return View("Error404");
                 }
 
                 var viewModel = new ProductDeleteViewModel
@@ -205,7 +228,7 @@ namespace PetShopProject.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex, "An error occurred while retrieving the product for deletion.");
-                return StatusCode(500, "An error occurred while retrieving the product. Please try again later.");
+                return View("Error500");
             }
         }
 
@@ -216,13 +239,21 @@ namespace PetShopProject.Areas.Admin.Controllers
         {
             try
             {
+                var product = await productService.GetProductByIdAsync(id);
+
+                if (product == null)
+                {
+                    logger.LogWarning($"Product with ID {id} not found for deletion.");
+                    return View("Error404");
+                }
+
                 await productService.DeleteProductAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "An error occurred while deleting the product.");
-                return StatusCode(500, "An error occurred while deleting the product. Please try again later.");
+                logger.LogError(ex, $"An error occurred while deleting the product with ID {id}.");
+                return View("Error500");
             }
         }
     }
