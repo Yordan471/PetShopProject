@@ -11,6 +11,11 @@ namespace PetShopProject.Core.ViewModels.ProductViewModels
     /// </summary>
     public class ProductEditViewModel
     {
+        public ProductEditViewModel() 
+        {
+            Categories = new List<CategoryForCreateProductViewModel>();
+        }
+
         /// <summary>
         /// Product identifier
         /// </summary>
@@ -76,6 +81,7 @@ namespace PetShopProject.Core.ViewModels.ProductViewModels
         /// <summary>
         /// Category identifier
         /// </summary>
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         /// <summary>
