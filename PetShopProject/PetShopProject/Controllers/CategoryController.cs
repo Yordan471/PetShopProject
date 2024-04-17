@@ -7,6 +7,8 @@ using PetShopProject.Core.ViewModels.ProductViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 using static PetShopProject.Common.GlobalConstants;
+using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
 
 
 namespace PetShopProject.Controllers
@@ -15,11 +17,13 @@ namespace PetShopProject.Controllers
     {
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
+        private readonly ILogger<CategoryController> logger;
 
-        public CategoryController(ICategoryService _categoryService, IProductService _productService)
+        public CategoryController(ICategoryService _categoryService, IProductService _productService, ILogger<CategoryController> _logger)
         {
             this.productService = _productService;
             this.categoryService = _categoryService;
+            this.logger = _logger;
         }
 
         [AllowAnonymous]
@@ -31,7 +35,7 @@ namespace PetShopProject.Controllers
 
             if (categories == null)
             {
-                return NotFound();
+                return View("Error404");
             }
 
             return View(categories);
@@ -40,18 +44,30 @@ namespace PetShopProject.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int Id, string animalType)
         {
-            Category category = await categoryService.GetCategoryByIdAsync(Id);
-
-            if (category == null)
+            if (Id <= 0)
             {
-                return NotFound();
+                return BadRequest("Invalid category ID.");
             }
 
-            CategoryViewModel categoryView = new()
+            if (string.IsNullOrEmpty(animalType))
             {
-                Name = category.Name,
-                Description = category.Description,
-                Products = category.Products
+                return BadRequest("Animal type is required.");
+            }
+
+            try
+            {
+                Category category = await categoryService.GetCategoryByIdAsync(Id);
+
+                if (category == null)
+                {
+                    return View("Error404");
+                }
+
+                CategoryViewModel categoryView = new()
+                {
+                    Name = category.Name,
+                    Description = category.Description,
+                    Products = category.Products
                 .Where(p => p.AnimalType == animalType)
                 .Select(p => new ProductViewModel
                 {
@@ -62,12 +78,20 @@ namespace PetShopProject.Controllers
                     Description = p.ShortDescription
                 })
                 .ToList()
-            };
+                };
 
-            return View(categoryView);
+                return View(categoryView);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error retrieving category details for ID: {Id}", Id);
+                TempData["ErrorMessage"] = "An error occurred while retrieving the category details.";
+                return View("Error505");
+            }
         }
 
         [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Create()
         {
             CreateCategoryViewModel category = new();
@@ -77,78 +101,121 @@ namespace PetShopProject.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCategoryViewModel model)
         {
             if (!ModelState.IsValid)
-            {      
-                return RedirectToAction(nameof(Create));
+            {
+                return View(model);
             }
 
-            Category category = new()
+            try
             {
-                Name = model.Name,
-                Description = model.Description,
-                AnimalType = model.AnimalType
-            };
+                Category category = new()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    AnimalType = model.AnimalType
+                };
 
-            await categoryService.CreateCategoryAsync(category);
+                await categoryService.CreateCategoryAsync(category);
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogError(ex, "An error occurred while creating a category.");
+                ModelState.AddModelError(string.Empty, "An error occurred while creating the category. Please try again.");
+
+                return View(model);
+            } 
         }
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int Id)
         {
-            Category category = await categoryService.GetCategoryByIdAsync(Id);
-            if (category == null)
+            try
             {
-                return NotFound();
+                Category category = await categoryService.GetCategoryByIdAsync(Id);
+                if (category == null)
+                {
+                    TempData["ErrorMessage"] = "Category not found";
+                    return View("Error404");
+                }
+
+                CategoryDeleteViewModel categoryDelete = new CategoryDeleteViewModel()
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    Description = category.Description,
+                    AnimalType = category.AnimalType
+                };
+
+                return View(categoryDelete);
             }
-
-            CategoryDeleteViewModel categoryDelete = new CategoryDeleteViewModel()
+            catch (Exception ex)
             {
-                Id = category.Id,
-                Name = category.Name,
-                Description = category.Description,
-                AnimalType = category.AnimalType
-            };
-
-            return View(categoryDelete);
+                logger.LogError(ex, "An error occurred while retrieving the category with ID: {id}", Id);
+                TempData["ErrorMessage"] = $"An error occurred while retrieving the category with ID: {Id}";
+                return View("Error500");
+            } 
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int Id)
         {
-            await categoryService.DeleteCategoryAsync(Id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                Category category = await categoryService.GetCategoryByIdAsync(Id);
+
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                await categoryService.DeleteCategoryAsync(Id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while deleting the category with ID: {Id}", Id);
+                TempData["ErrorMessage"] = $"An error occurred while deleting the category with ID: {Id}";
+                return View("Error500");
+            }   
         }
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
-            var category = await categoryService.GetCategoryByIdAsync(id);
-            if (category == null)
+            try
             {
-                return NotFound();
+                var category = await categoryService.GetCategoryByIdAsync(id);
+                if (category == null)
+                {
+                    return View("Error404");
+                }
+
+                CategoryEditViewModel editCategory = new()
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    Description = category.Description,
+                    AnimalType = category.AnimalType
+                };
+
+                return View(editCategory);
             }
-
-            CategoryEditViewModel editCategory = new()
+            catch (Exception ex)
             {
-                Id = category.Id,
-                Name = category.Name,
-                Description = category.Description,
-                AnimalType = category.AnimalType
-            };
-
-            return View(editCategory);
+                logger.LogError(ex, "An error occurred while retrieving the category with ID: {id}", id);
+                TempData["ErrorMessage"] = $"An error occurred while retrieving the category with ID: {id}";
+                return View("Error500");
+            }   
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CategoryEditViewModel category)
         {
             if (id != category.Id)
@@ -156,13 +223,29 @@ namespace PetShopProject.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var existingCategory = await categoryService.GetCategoryByIdAsync(id);
+            if (existingCategory == null)
             {
-                await categoryService.EditCategoryAsync(category);
-                return RedirectToAction(nameof(Index));
+                TempData["ErrorMessage"] = "Category not found";
+                return View("Error404");
             }
 
-            return View(category);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await categoryService.EditCategoryAsync(category);
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(category);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while editing the category with ID: {id}", id);
+                TempData["ErrorMessage"] = $"An error occurred while editing the category with ID: {id}";
+                return View("Error505");
+            }  
         }
     }
 }
