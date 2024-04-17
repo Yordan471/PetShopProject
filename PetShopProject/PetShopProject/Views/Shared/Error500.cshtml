@@ -6,12 +6,9 @@
 <p>An unexpected error occurred while processing your request.</p>
 <p>Please try again later or contact our support team if the problem persists.</p>
 
-@if (TempData["ErrorMessage_Cart"] != null)
+@if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">@TempData["ErrorMessage_Cart"]</div>
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }
 
-@if (TempData["ErrorMessage_UpdateCart"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMessage_UpdateCart"]</div>
-}
+

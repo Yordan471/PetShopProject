@@ -5,3 +5,8 @@
 <h1>Internal Server Error</h1>
 <p>An unexpected error occurred while processing your request.</p>
 <p>Please try again later or contact our support team if the problem persists.</p>
+
+@if (TempData["ErrorMessage_Cart"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage_Cart"]</div>
+}

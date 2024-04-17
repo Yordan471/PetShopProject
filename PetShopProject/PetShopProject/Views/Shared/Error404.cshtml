@@ -14,7 +14,7 @@
     <p>HTTP 404 - Not Found</p>
 </div>
 
-@if (TempData["ErrorMessage_CartNotFound"] != null)
+@if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">@TempData["ErrorMessage_CartNotFound"]</div>
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }

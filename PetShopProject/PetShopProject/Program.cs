@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using PetShopProject.Extensions;
 using PetShopProject.Infrastructure.Data.Models;
@@ -28,6 +29,13 @@ namespace PetShopProject
                 {
                     options.AppId = builder.Configuration["Authentication:Facebook:AppId"];
                     options.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
+                });
+            // За спомагане предотватяването на XSS, при опит за достъп до бисквитките чрез JavaScript
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 });
 
 
