@@ -86,7 +86,7 @@ namespace PetShopProject.Controllers
             {
                 logger.LogError(ex, "Error retrieving category details for ID: {Id}", Id);
                 TempData["ErrorMessage"] = "An error occurred while retrieving the category details.";
-                return View("Error505");
+                return View("Error500");
             }
         }
 
@@ -119,7 +119,7 @@ namespace PetShopProject.Controllers
 
                 await categoryService.CreateCategoryAsync(category);
 
-                return View(model);
+                return View("Index");
             }
             catch (Exception ex)
             {
@@ -234,7 +234,15 @@ namespace PetShopProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await categoryService.EditCategoryAsync(category);
+                    Category categoryToEdit = new()
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        Description = category.Description,
+                        AnimalType = category.AnimalType
+                    };
+
+                    await categoryService.EditCategoryAsync(categoryToEdit);
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -244,7 +252,7 @@ namespace PetShopProject.Controllers
             {
                 logger.LogError(ex, "An error occurred while editing the category with ID: {id}", id);
                 TempData["ErrorMessage"] = $"An error occurred while editing the category with ID: {id}";
-                return View("Error505");
+                return View("Error500");
             }  
         }
     }

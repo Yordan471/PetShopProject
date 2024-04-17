@@ -5,6 +5,7 @@
         <div class="col-md-6">
             <h2 class="text-center mb-4">Create Category</h2>
             <form asp-action="Create" method="post">
+                <input type="hidden" asp-for="AnimalType" value="@Model.AnimalType" />
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
